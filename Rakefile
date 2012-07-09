@@ -17,8 +17,8 @@ Jeweler::Tasks.new do |gem|
   gem.name = "adcloud_sdk"
   gem.homepage = "http://github.com/koos/adcloud_sdk"
   gem.license = "MIT"
-  gem.summary = %Q{TODO: one-line summary of your gem}
-  gem.description = %Q{TODO: longer description of your gem}
+  gem.summary = %Q{Adcloud API SDK}
+  gem.description = %Q{This is the official Adcloud API SDK. If you have any problems or requests please contact api@adcloud.com.}
   gem.email = "jan@railslove.com"
   gem.authors = ["Jan Kus"]
   # dependencies defined in Gemfile

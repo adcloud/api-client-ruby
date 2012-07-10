@@ -1,7 +1,11 @@
 require 'helper'
 
 class TestAdcloudSdk < Test::Unit::TestCase
-  should "probably rename this file and start testing for real" do
-    flunk "hey buddy, you should probably rename this file and start testing for real"
+
+  class Test < self
+    def test_test
+      assert false
+    end
   end
+
 end

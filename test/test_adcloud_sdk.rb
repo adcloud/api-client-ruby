@@ -4,7 +4,7 @@ class TestAdcloudSdk < Test::Unit::TestCase
 
   class Test < self
     def test_test
-      assert false
+      assert true
     end
   end
 

@@ -5,10 +5,10 @@ source "http://rubygems.org"
 
 # Add dependencies to develop your gem here.
 # Include everything needed to run rake, tests, features, etc.
-group :development do
+group :development, :test do
   gem "rdoc", "~> 3.12"
   gem "bundler"
   gem "jeweler", "~> 1.8.4"
-  gem "simplecov"
+  gem 'simplecov', :require => false
   gem 'minitest'  
 end

@@ -32,16 +32,17 @@ Rake::TestTask.new(:test) do |test|
   test.verbose = true
 end
 
-require 'simplecov'
-Rake::TestTask.new(:test) do |test|
-  SimpleCov.command_name 'Unit Tests'
-  SimpleCov.start do
-    add_filter 'test_'
-  end
-  test.libs << 'lib' << 'test'
-  test.pattern = 'test/**/test_*.rb'
-  test.verbose = true
-end
+# Get it up and running with travis-ci
+# require 'simplecov'
+# Rake::TestTask.new(:test) do |test|
+#   SimpleCov.command_name 'Unit Tests'
+#   SimpleCov.start do
+#     add_filter 'test_'
+#   end
+#   test.libs << 'lib' << 'test'
+#   test.pattern = 'test/**/test_*.rb'
+#   test.verbose = true
+# end
 
 task :default => :test
 

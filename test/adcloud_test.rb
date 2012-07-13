@@ -1,10 +1,10 @@
 require 'test_helper'
 
-describe "AdcloudSdk" do
+describe "Adcloud" do
 
   describe "Configuration" do
 
-    subject { AdcloudSdk::Configuration.config }
+    subject { Adcloud.config }
 
     it "should return the default debug setting" do
       subject.debug.must_equal true
@@ -35,7 +35,7 @@ describe "AdcloudSdk" do
   describe "Logger" do
 
     it "should be a logger" do
-      AdcloudSdk.logger.must_be_instance_of Logger
+      Adcloud.logger.must_be_instance_of Logger
     end
 
   end

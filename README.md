@@ -25,7 +25,7 @@ This is the official Adcloud API SDK. If you have any problems or requests pleas
 
 # Configuration
 
-    AdcloudSdk::Configuration.configure do |c|
+    AdcloudSdk.configure do |c|
       c.port = 80
       c.protocol = 'https'
       c.host = 'api.adcloud.net'

@@ -15,13 +15,17 @@ This is the official Adcloud API SDK. If you have any problems or requests pleas
 * Create Campaign
 * Update Campaign
 * Create Ads
-* Creat Attachments for Ads
+* Update Ads
+* Create Attachments for Ads
+* Update Attachments for Ads
 * Read Reports
   * Not sure how the Reports are transported (Stream, File, ...)
 *.must_equal => Create another engine for adklaus-push-updates
 * Create gemspec
 * Filtering
 * All customers
+* All campaigns
+* Push to Campaign (e.g. update a status etc.)
 
 # Configuration
 

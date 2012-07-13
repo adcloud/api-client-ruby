@@ -1,4 +1,4 @@
-module AdcloudSdk
+module Adcloud
   
   class Campaign
     

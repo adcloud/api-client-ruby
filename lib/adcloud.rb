@@ -6,7 +6,12 @@ require 'json'
 require 'base64'
 require 'active_support/configurable'
 
-module AdcloudSdk
+module Adcloud
+  autoload :Ad, "adcloud/ad"
+  autoload :Attachment, "adcloud/attachment"
+  autoload :Campaign, "adcloud/campaign"
+  autoload :Oauth, "adcloud/oauth"
+  autoload :Report, "adcloud/report"
   
   class Configuration
     include ActiveSupport::Configurable
@@ -14,7 +19,7 @@ module AdcloudSdk
 
   class << self
     
-    AdcloudSdk::Configuration.configure do |c|
+    Adcloud::Configuration.configure do |c|
       c.port = 80
       c.protocol = 'https'
       c.host = 'api.adcloud.net'
@@ -27,7 +32,7 @@ module AdcloudSdk
 
     # Access the logger instance
     def logger
-      @@logger ||= AdcloudSdk::Configuration.config.logger || Logger.new(STDOUT)
+      @@logger ||= Adcloud::Configuration.config.logger || Logger.new(STDOUT)
     end
 
     # Allow to override the logger

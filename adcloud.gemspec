@@ -20,5 +20,5 @@ Gem::Specification.new do |gem|
   gem.add_development_dependency 'webmock'
 
   gem.add_dependency 'json'
-  gem.add_dependency 'active_support'
+  gem.add_dependency 'activesupport', "~>3.1.0"
 end

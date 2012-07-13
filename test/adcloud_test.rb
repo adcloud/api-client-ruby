@@ -4,7 +4,7 @@ describe "Adcloud" do
 
   describe "Configuration" do
 
-    subject { Adcloud::Configuration.config }
+    subject { Adcloud.config }
 
     it "should return the default debug setting" do
       subject.debug.must_equal true

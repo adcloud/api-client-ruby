@@ -27,6 +27,7 @@ module Adcloud
     end
   end
 end
+
 Adcloud.configure do |c|
   c.port = 80
   c.protocol = 'https'

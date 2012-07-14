@@ -28,16 +28,9 @@ This is the official Adcloud API SDK. If you have any problems or requests pleas
 
 # Configuration
 
-    AdcloudSdk::Configuration.configure do |c|
-      c.port = 80
-      c.protocol = 'https'
-      c.host = 'api.adcloud.net'
-      c.http_open_timeout = 5
-      c.http_read_timeout = 10
-      c.debug = true
-      # Authentication stuff
-      # c.app_key
-      # c.app_secret
+    Adcloud.configure do |c|
+      c.app_key = "mykey"
+      c.app_secret = "mysecret"
     end
 
 # Authentication

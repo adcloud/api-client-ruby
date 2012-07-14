@@ -2,12 +2,11 @@
 require File.expand_path('../lib/adcloud/version', __FILE__)
 
 Gem::Specification.new do |gem|
-  gem.authors       = ["Jan Kus"]
+  gem.authors       = ["Jan Kus", "Max Schulz"]
   gem.email         = ["jan@railslove.com"]
-  gem.description   = %q{official adcloud gem}
-  gem.summary       = %q{official adcloud gem}
-  gem.homepage      = ""
-
+  gem.summary = %Q{Adcloud API SDK}
+  gem.description = %Q{This is the official Adcloud API SDK. If you have any problems or requests please contact api@adcloud.com.}
+  gem.homepage      = "http://github.com/koos/adcloud_sdk"
   gem.executables   = `git ls-files -- bin/*`.split("\n").map{ |f| File.basename(f) }
   gem.files         = `git ls-files`.split("\n")
   gem.test_files    = `git ls-files -- {test,spec,features}/*`.split("\n")

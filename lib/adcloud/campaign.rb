@@ -23,8 +23,8 @@ module Adcloud
     :exclusion_keywords, #x
     :keyword_lifetime, #x
     :comment, #x
-    :bookkeeping_reference, #x
     :budget_limit, #x
+    :budget_limit_allowed, #x
     :unit_price_maximum, #x
     :locations, #x
     :type, #x
@@ -34,10 +34,7 @@ module Adcloud
     :deactivated_on, #x
     :modified, #x
     :created, #x
-    # :discount, # missing 
-    # :limit_allowed, # missing
     # :fixed_price, # missing
-    # :external_link, # missing
     # :mobile_targeting, # missing
   ]
 

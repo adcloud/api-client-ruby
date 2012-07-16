@@ -12,9 +12,10 @@ module Adcloud
   autoload :Ad, "adcloud/ad"
   autoload :Attachment, "adcloud/attachment"
   autoload :Campaign, "adcloud/campaign"
-  autoload :Oauth, "adcloud/oauth"
-  autoload :Report, "adcloud/report"
-  
+  autoload :Authentication, "adcloud/authentication"
+  autoload :Report, "adcloud/report"  
+  autoload :HTTPClient, "adcloud/http_client"
+
   class << self
     # Access the logger instance
     def logger
@@ -26,6 +27,7 @@ module Adcloud
       @@logger = input
     end
   end
+
 end
 
 Adcloud.configure do |c|
@@ -35,6 +37,6 @@ Adcloud.configure do |c|
   c.http_open_timeout = 5
   c.http_read_timeout = 10
   c.debug = true
-  # c.app_key
-  # c.app_secret
+  # c.client_id
+  # c.client_secret
 end

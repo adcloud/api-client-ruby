@@ -6,6 +6,7 @@ This is the official Adcloud API SDK. If you have any problems or requests pleas
 
 * Jan Kus
 * Maximilian Schulz
+* Michael Bumann
 
 # TODO
 
@@ -29,13 +30,13 @@ This is the official Adcloud API SDK. If you have any problems or requests pleas
 # Configuration
 
     Adcloud.configure do |c|
-      c.app_key = "mykey"
-      c.app_secret = "mysecret"
+      c.client_id
+      c.client_secret
     end
 
 # Authentication
 
-... (just setup your keys.... see configuration)
+  Setup your client_id, client_secret
 
 # Customer
 
@@ -53,9 +54,22 @@ This is the official Adcloud API SDK. If you have any problems or requests pleas
 
     Campaign.all
 
-## Read a Campaign object
+## Campaign
+
+### Creating a New Campaign Object
+
+    campaign = Adcloud::Campaign.new({x=>x,y=>y,z=>z})
+
+### Read/Find a campaign
 
     Campaign.find_by_id(42)
 
-## Write a Campaign object
+### Validating a campaign
+
+    campaign.valid?
+
+### Create/Write a new campaign
+
+    campaign.create
+
 

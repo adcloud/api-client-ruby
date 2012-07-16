@@ -7,12 +7,12 @@ module Adcloud
     # {"access_token":"<ACCESS_TOKEN>","scope":""}
     def token
       # @token ||= begin
-        # response = Farraday.post("#{Adcloud.configure.protocol}://#{Adcloud.configure.host}:#{Adcloud.configure.port}/access_token?client_id=#{Adcloud.configure.client_id}&client_secret=#{Adcloud.configure.client_secret})
-        # if response.success?
-        #   @token = JSON.parse(response.body)["access_token"]
-        # else
-        #  Exception.new .........
-        # end 
+      #   response = Farraday.post("#{Adcloud.configure.protocol}://#{Adcloud.configure.host}:#{Adcloud.configure.port}/access_token?client_id=#{Adcloud.configure.client_id}&client_secret=#{Adcloud.configure.client_secret}")
+      #   if response.success?
+      #     @token = JSON.parse(response.body)["access_token"]
+      #   else
+      #    Exception.new .........
+      #   end 
       # end
     end
 

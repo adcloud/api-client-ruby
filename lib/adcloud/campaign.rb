@@ -43,17 +43,30 @@ module Adcloud
 
   class Campaign < Struct.new(*campaign_attributes)
 
-    attr_accessor :errors, :attributes
+    attr_accessor :errors
 
     def errors
       @errors ||= {}
     end
 
+    # Should we have a method that validates attributes of an object ?
+    # campaign = Adcloud::Campaign.new({:name => 'meine campagnie', :produkt_name => 'schuhe', :budget => 100})
+    # campaign.valid_attributes({:name => 'meine campagnie', :produkt_name => 'schuhe'})
+    # Returns: true/false
+    #
+    #   false: campaign.errors => [:produkt_name => {false, msg}, :name => {false, msg}]
+    #   true: campaign.errors => []
+    #
+    # def valid_attributes(attr = {})
+    #   # ....
+    # end
+
+    # Validates the whole object
     def valid?
-      # status = Adcloud::HttpClient.post('validate_campaign', self.attributes)
+      # status = Adcloud::HttpClient.post('validate_campaign', self.campaign_attributes)
       # response = case status.code 
       # when 200
-      # true
+      #   true
       # else 442 # request contains inacceptable advertisement attributes
       #   self.errors = JSON.parse(response.body)
       #   false
@@ -61,10 +74,10 @@ module Adcloud
     end
 
     def create
-      # status = Adcloud::HttpClient.post('create_campaign', self.attributes)
+      # status = Adcloud::HttpClient.post('create_campaign', self.campaign_attributes)
       # response = case status.code 
       # when 201
-      # true
+      #   true
       # else 442 # request contains inacceptable advertisement attributes
       #   self.errors = JSON.parse(response.body)
       #   false

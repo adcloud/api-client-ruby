@@ -41,7 +41,5 @@ Adcloud.configure do |c|
   c.http_open_timeout = 5
   c.http_read_timeout = 10
   c.debug = false
-  # Setup your id and secret
-  # c.client_id
-  # c.client_secret
+  # c.authentication = Adcloud::Authentication.new(:client_id => "1234567890", :client_secret => "1234567890")
 end

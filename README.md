@@ -30,13 +30,15 @@ This is the official Adcloud API SDK. If you have any problems or requests pleas
 # Configuration
 
     Adcloud.configure do |c|
-      c.client_id
-      c.client_secret
+      c.client_id="1234567890"
+      c.client_secret = "09876543"
     end
 
 # Authentication
 
-  Setup your client_id, client_secret
+    adcloud_auth = Adcloud::Authentication.new(:client_id => Adcloud.config.client_id, :client_secret => Adcloud.config.client_secret)
+    adcloud_auth.authenticate!
+    adcloud_auth.token
 
 # Customer
 

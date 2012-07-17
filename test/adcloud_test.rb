@@ -7,7 +7,7 @@ describe "Adcloud" do
     subject { Adcloud.config }
 
     it "should return the default debug setting" do
-      subject.debug.must_equal true
+      subject.debug.must_equal false
     end   
 
     it "should return the default port" do

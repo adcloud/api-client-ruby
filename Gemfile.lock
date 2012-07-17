@@ -3,6 +3,7 @@ PATH
   specs:
     adcloud (0.1.0)
       activesupport (~> 3.1.0)
+      faraday
       json
 
 GEM
@@ -14,6 +15,8 @@ GEM
     ansi (1.4.3)
     builder (3.0.0)
     crack (0.3.1)
+    faraday (0.8.0)
+      multipart-post (~> 1.1)
     hashie (1.2.0)
     json (1.7.3)
     minitest (3.2.0)
@@ -24,6 +27,7 @@ GEM
       powerbar
     minitest_should (0.3.1)
     multi_json (1.3.6)
+    multipart-post (1.1.5)
     powerbar (1.0.7)
       ansi (~> 1.4.0)
       hashie (>= 1.1.0)

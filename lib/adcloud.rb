@@ -5,8 +5,12 @@ require 'logger'
 require 'json'
 require 'base64'
 require 'active_support/configurable'
+require 'faraday'
 
 module Adcloud
+
+  class AuthenticationError   < StandardError ; end
+
   include ActiveSupport::Configurable
 
   autoload :Ad, "adcloud/ad"
@@ -36,7 +40,8 @@ Adcloud.configure do |c|
   c.host = 'api.adcloud.net'
   c.http_open_timeout = 5
   c.http_read_timeout = 10
-  c.debug = true
+  c.debug = false
+  # Setup your id and secret
   # c.client_id
   # c.client_secret
 end

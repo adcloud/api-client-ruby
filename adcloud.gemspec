@@ -20,4 +20,5 @@ Gem::Specification.new do |gem|
 
   gem.add_dependency 'json'
   gem.add_dependency 'activesupport', "~>3.1.0"
+  gem.add_dependency 'faraday'
 end

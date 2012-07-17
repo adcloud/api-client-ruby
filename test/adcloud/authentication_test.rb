@@ -78,11 +78,11 @@ describe Adcloud::Authentication do
 
   describe "is unsuccessful" do
     
-    it "should raise an authentication error" #do
-    #   stub_request(:post, "https://api.adcloud.net:80/v2/oauth/access_token").with(:body => {"client_id"=>"0987654321", "client_secret"=>"1234567890", "grant_type"=>"none"}, :headers => {'Accept'=>'*/*', 'Content-Type'=>'application/x-www-form-urlencoded', 'User-Agent'=>'Ruby'}).to_return(:status => 401, :body => "{\"status\":401,\"errors\":[{\"message\":\"Bad credentials\"}]}", :headers => {})
-    #   adcloud_auth = Adcloud::Authentication.new(:client_id => "0987654321", :client_secret => "1234567890")        
-    #   expect { adcloud_auth.authenticate! }.to raise_error(Adcloud::AuthenticationError)
-    # end
+    it "should raise an authentication error" do
+      stub_request(:post, "https://api.adcloud.net:80/v2/oauth/access_token").with(:body => {"client_id"=>"0987654321", "client_secret"=>"1234567890", "grant_type"=>"none"}, :headers => {'Accept'=>'*/*', 'Content-Type'=>'application/x-www-form-urlencoded', 'User-Agent'=>'Ruby'}).to_return(:status => 401, :body => "{\"status\":401,\"errors\":[{\"message\":\"Bad credentials\"}]}", :headers => {})
+      adcloud_auth = Adcloud::Authentication.new(:client_id => "0987654321", :client_secret => "1234567890")
+      -> { adcloud_auth.authenticate! }.must_raise(Adcloud::AuthenticationError)
+    end
 
   end
 

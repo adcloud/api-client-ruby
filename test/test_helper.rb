@@ -4,6 +4,7 @@ require 'minitest/mock'
 require 'minitest/autorun'
 require "minitest/reporters"
 require 'webmock/minitest'
+require 'mocha'
 
 begin
   Bundler.setup(:default, :development)

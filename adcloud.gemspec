@@ -17,6 +17,7 @@ Gem::Specification.new do |gem|
   gem.add_development_dependency 'minitest_should'
   gem.add_development_dependency 'minitest-reporters'
   gem.add_development_dependency 'webmock'
+  gem.add_development_dependency 'mocha'
 
   gem.add_dependency 'json'
   gem.add_dependency 'activesupport', "~>3.1.0"

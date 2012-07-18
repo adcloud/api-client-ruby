@@ -8,7 +8,7 @@ module Adcloud
       Adcloud.logger.debug('Adcloud::Authentication') { "Opening Connection" } if Adcloud.config.debug
       @connection ||= Faraday.new(:url => "#{Adcloud.config.protocol}://#{Adcloud.config.host}:#{Adcloud.config.port}") do |faraday|
         faraday.request  :url_encoded                     # form-encode POST params
-        faraday.response :logger if Adcloud.config.debug  # log requests to STDOUT
+        faraday.response :logger                          # log requests to STDOUT
         faraday.adapter  Faraday.default_adapter          # make requests with Net::HTTP
       end
       Adcloud.logger.debug('Adcloud::Authentication') { "Connection: #{@connection}" } if Adcloud.config.debug      

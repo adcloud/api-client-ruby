@@ -15,15 +15,6 @@ describe Adcloud::Connection do
       end
 
       it "shouldn't have a handler" do
-        @conn.connection.builder.handlers.wont_include(Faraday::Response::Logger)
-      end
-
-    end
-
-    describe "logged connection" do
-
-      it "should have a logger handler" do
-        Adcloud.config.expects(:debug).returns(true)
         @conn.connection.builder.handlers.must_include(Faraday::Response::Logger)
       end
 

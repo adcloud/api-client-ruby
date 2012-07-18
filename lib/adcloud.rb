@@ -18,7 +18,7 @@ module Adcloud
   autoload :Campaign, "adcloud/campaign"
   autoload :Authentication, "adcloud/authentication"
   autoload :Report, "adcloud/report"  
-  autoload :HTTPClient, "adcloud/http_client"
+  autoload :Connection, "adcloud/connection"
 
   class << self
     # Access the logger instance

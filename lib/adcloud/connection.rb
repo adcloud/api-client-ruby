@@ -23,6 +23,7 @@ module Adcloud
       end
     end
 
+    # Faraday Middleware
     def post(path, data)
       # token = @authentication.token
       # Farraday.post(url, token, data)

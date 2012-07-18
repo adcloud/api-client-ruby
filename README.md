@@ -20,6 +20,7 @@ This is the official Adcloud API SDK. If you have any problems or requests pleas
 * Create Attachments for Ads
 * Update Attachments for Ads
 * Read Reports
+* Get Topics (Reach and Price)
   * Not sure how the Reports are transported (Stream, File, ...)
 *.must_equal => Create another engine for adklaus-push-updates
 * Filtering

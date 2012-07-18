@@ -8,27 +8,27 @@ describe "Adcloud" do
 
     it "should return the default debug setting" do
       subject.debug.must_equal false
-    end   
+    end
 
     it "should return the default port" do
       subject.port.must_equal 80
-    end   
+    end
 
     it "should return the default protocol" do
       subject.protocol.must_equal 'https'
-    end   
+    end
 
     it "should return the default host" do
       subject.host.must_equal 'api.adcloud.net'
-    end   
+    end
 
     it "should return the default open timout" do
       subject.http_open_timeout.must_equal 5
-    end   
+    end
 
     it "should return the default read timeout" do
       subject.http_read_timeout.must_equal 10
-    end   
+    end
 
   end
 

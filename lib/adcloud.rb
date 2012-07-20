@@ -1,16 +1,16 @@
-require 'net/http'
-require 'net/https'
-require 'digest'
 require 'logger'
 require 'json'
-require 'base64'
 require 'active_support/configurable'
 require 'faraday'
 
 module Adcloud
 
-  class AuthenticationError   < StandardError ; end
-
+  class AuthenticationError    < StandardError ; end
+  class InvalidFilter          < StandardError ; end
+  class BadRequest             < StandardError ; end
+  class NotFound               < StandardError ; end
+  class InvalidRequest         < StandardError ; end
+  
   include ActiveSupport::Configurable
 
   autoload :Ad, "adcloud/ad"
@@ -19,6 +19,7 @@ module Adcloud
   autoload :Authentication, "adcloud/authentication"
   autoload :Report, "adcloud/report"  
   autoload :Connection, "adcloud/connection"
+  autoload :Entity, "adcloud/entity"
 
   class << self
     # Access the logger instance
@@ -38,6 +39,7 @@ Adcloud.configure do |c|
   c.port = 80
   c.protocol = 'https'
   c.host = 'api.adcloud.net'
+  c.api_version = "v2"
   c.http_open_timeout = 5
   c.http_read_timeout = 10
   c.debug = false

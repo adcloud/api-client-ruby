@@ -35,6 +35,10 @@ GEM
       ansi (~> 1.4.0)
       hashie (>= 1.1.0)
     rake (0.9.2.2)
+    simplecov (0.6.4)
+      multi_json (~> 1.0)
+      simplecov-html (~> 0.5.3)
+    simplecov-html (0.5.3)
     webmock (1.8.7)
       addressable (>= 2.2.7)
       crack (>= 0.1.7)
@@ -48,4 +52,5 @@ DEPENDENCIES
   minitest_should
   mocha
   rake
+  simplecov
   webmock

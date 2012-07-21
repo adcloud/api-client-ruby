@@ -1,6 +1,6 @@
 module Adcloud
   
-  class Customer
+  class Customer < Adcloud::Entity
     
   end
 end

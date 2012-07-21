@@ -1,14 +1,6 @@
 module Adcloud
   
-  class Base
-
-    def connection
-      # @connection ||= Connection.new(....)
-    end
-
-  end
-
-  class Report < Base
+  class Report < Adcloud::Entity
 
     def find(id)
       # connection.get("/reports/", :id => id)

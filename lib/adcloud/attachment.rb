@@ -1,6 +1,6 @@
 module Adcloud
   
-  class Attachment
+  class Attachment < Adcloud::Entity
     
   end
 end

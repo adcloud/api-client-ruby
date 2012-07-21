@@ -22,6 +22,10 @@ describe "Adcloud" do
       subject.host.must_equal 'api.adcloud.net'
     end
 
+    it "should return the default version" do
+      subject.api_version.must_equal 'v2'
+    end
+
     it "should return the default open timout" do
       subject.http_open_timeout.must_equal 5
     end

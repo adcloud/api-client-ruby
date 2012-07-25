@@ -1,5 +1,7 @@
 module Adcloud
-  
+
+  class AuthenticationError    < StandardError ; end
+    
   class Authentication
     
     attr_accessor :client_id, :client_secret, :token
@@ -10,7 +12,7 @@ module Adcloud
     end
 
     def authenticate!
-      response = Connection.new.connection.post "oauth/access_token", {:client_id => self.client_id, :client_secret => self.client_secret, :grant_type => "none"}
+      response = Connection.new.connection(false).post "oauth/access_token", {:client_id => self.client_id, :client_secret => self.client_secret, :grant_type => "none"}
       if response.success?
         @token = JSON.parse(response.body)["access_token"]
       else

@@ -2,14 +2,9 @@ require 'logger'
 require 'json'
 require 'active_support/configurable'
 require 'faraday'
+require 'virtus'
 
 module Adcloud
-
-  class AuthenticationError    < StandardError ; end
-  class InvalidFilter          < StandardError ; end
-  class BadRequest             < StandardError ; end
-  class NotFound               < StandardError ; end
-  class InvalidRequest         < StandardError ; end
   
   include ActiveSupport::Configurable
 

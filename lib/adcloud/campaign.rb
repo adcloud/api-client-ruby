@@ -1,73 +1,57 @@
 module Adcloud
 
   class Campaign < Adcloud::Entity
-
     attr_accessor :errors
 
-    # field :id
-    # field :bidding_enabled
-    # field :name
-    # field :customer_id
-    # field :company_id
-    # field :company_name
-    # field :product_id
-    # field :product_name
-    # field :status
-    # field :language_id
-    # field :start_date
-    # field :end_date
-    # field :delivery_boost
-    # field :frequency_capping
-    # field :frequency_capping_days
-    # field :cookie_lifetime
-    # field :cookie_lifetime_view
-    # field :fallback
-    # field :keywords
-    # field :exclusion_keywords
-    # field :keyword_lifetime
-    # field :comment
-    # field :budget_limit
-    # field :budget_limit_allowed
-    # field :unit_price_maximum
-    # field :locations
-    # field :type
-    # field :delivery_external
-    # field :delivery_internal
-    # field :delivery_type
-    # field :deactivated_on
-    # field :modified
-    # field :created
+    attribute :id, Integer
+    attribute :bidding_enabled, Boolean
+    attribute :name, String
+    attribute :customer_id, Integer
+    attribute :company_id, Integer
+    attribute :company_name, String
+    attribute :product_id, Integer
+    attribute :product_name, String
+    attribute :status, Integer
+    attribute :language_id, Integer
+    attribute :start_date, DateTime
+    attribute :end_date, DateTime
+    attribute :delivery_boost, Float
+    attribute :frequency_capping, Integer
+    attribute :frequency_capping_days, Integer
+    attribute :cookie_lifetime, Integer
+    attribute :cookie_lifetime_view, Integer
+    attribute :fallback, Boolean
+    attribute :keywords, String
+    attribute :exclusion_keywords, Array
+    attribute :keyword_lifetime, Integer
+    attribute :comment, String
+    attribute :budget_limit, Float
+    attribute :budget_limit_allowed, Boolean
+    attribute :unit_price_maximum, Float
+    attribute :locations, Array
+    attribute :type, Integer
+    attribute :delivery_external, Boolean
+    attribute :delivery_internal, Boolean
+    attribute :delivery_type, Integer
+    attribute :deactivated_on, DateTime
+    attribute :modified, DateTime
+    attribute :created, DateTime
 
-    # field :fixed_price, # missing
-    # field :mobile_targeting, # missing
+    # attribute :fixed_price, # missing
+    # attribute :mobile_targeting, # missing
 
     def errors
       @errors ||= []
     end
 
     def self.all(filter_params={})
-      response = connection.get("campaigns", :filter => filter_params)
-      if response.success?
-        JSON.parse(response.body)["items"].map do |raw_campaign|
-          raw_campaign
-        end
-      elsif response.status == 400
-        raise InvalidFilter.new(JSON.parse(response.body)["_meta"])
-      else
-        raise InvalidRequest.new(JSON.parse(response.body)["_meta"])
-      end
+      result = connection.get("campaigns", :filter => filter_params)
+      result["items"].map {| raw_campaign | Campaign.new(raw_campaign) }
     end
 
     def self.find(id)
-      response = connection.get("campaigns/#{id}")
-      if response.success?
-        # Campaign.new(JSON.parse(response.body))
-        JSON.parse(response.body)
-      elsif response.status == 404
-        raise NotFound.new(JSON.parse(response.body)["_meta"])
-      else
-        raise InvalidRequest.new(JSON.parse(response.body)["_meta"])
-      end
+      result = connection.get("campaigns/#{id}")
+      Campaign.new(result)
     end
 
     # def create

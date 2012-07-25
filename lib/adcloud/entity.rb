@@ -1,6 +1,7 @@
 module Adcloud
 
   class Entity
+    include Virtus
 
     def self.connection
       @connection ||= Connection.new

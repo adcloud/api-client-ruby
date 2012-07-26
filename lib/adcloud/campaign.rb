@@ -41,6 +41,10 @@ module Adcloud
     # attribute :fixed_price, # missing
     # attribute :mobile_targeting, # missing
 
+    def meta
+      self._meta
+    end
+
     def errors
       @errors ||= []
     end
@@ -61,7 +65,7 @@ module Adcloud
     #   when 201
     #     true
     #   else 442 # request contains inacceptable advertisement attributes
-    #     self.errors = JSON.parse(response.body)
+    #     self.errors = response.body
     #     false
     #   end
     # end
@@ -90,7 +94,7 @@ module Adcloud
     #   when 200
     #     true
     #   else 442 # request contains inacceptable advertisement attributes
-    #     self.errors = JSON.parse(response.body)
+    #     self.errors = response.body
     #     false
     #   end
     # end

@@ -1,7 +1,10 @@
-require 'logger'
-require 'json'
-require 'active_support/configurable'
 require 'faraday'
+require 'faraday_middleware'
+require 'adcloud/response_error_handler'
+
+require 'logger'
+
+require 'active_support/configurable'
 require 'virtus'
 
 module Adcloud

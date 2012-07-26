@@ -39,6 +39,9 @@ module Adcloud
     end
 
     # Move it to Faraday Middleware
+    # Faraday has an JSON parser
+    # etc.
+    # Look at faraday
     def post(path, params = {})
       response = connection.post path, params
       if response.success?

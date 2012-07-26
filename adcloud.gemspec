@@ -19,7 +19,7 @@ Gem::Specification.new do |gem|
   gem.add_development_dependency 'webmock'
   gem.add_development_dependency 'mocha'
   gem.add_development_dependency 'simplecov'
-  gem.add_development_dependency 'debugger'
+  # gem.add_development_dependency 'debugger'
 
   gem.add_dependency 'virtus'    
   gem.add_dependency 'json'

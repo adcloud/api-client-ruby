@@ -20,8 +20,7 @@ module Adcloud
         if response.success?
           response.body
         else
-          module_name = response.body["_meta"]["type"].split("::")[0]
-          klass_name = response.body["_meta"]["type"].split("::")[1]
+          module_name, klass_name = response.body["_meta"]["type"].split("::")
           klass = create_module_and_class(module_name, klass_name, StandardError)
           raise klass.new({response.body["_meta"]["status"] => response.body["_meta"]["message"]})
         end

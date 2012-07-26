@@ -5,13 +5,13 @@ describe Adcloud::Campaign do
   subject { Adcloud::Campaign }
 
   let(:connection) { stub() }
-  
+
   before do
     subject.stubs(:connection => connection)
   end
 
   describe "errors" do
-    
+
     it "should be empty" do
       subject.new.errors.must_be_empty
     end
@@ -20,9 +20,12 @@ describe Adcloud::Campaign do
 
   describe '#initialize' do
     let(:response_data) { {"id"=>123, "bidding_enabled"=>0, "name"=>"Tagesgeld / August 08", "customer_id"=>0, "company_id"=>1, "company_name"=>"Adcloud GmbH", "product_id"=>2564, "product_name"=>"Volkswagen Bank Tagesgeld", "status"=>10, "language_id"=>1, "start_date"=>"2008-08-15", "end_date"=>"2008-09-16", "delivery_boost"=>1.0, "frequency_capping"=>0, "frequency_capping_days"=>0, "cookie_lifetime"=>30, "cookie_lifetime_view"=>4, "fallback"=>false, "keywords"=>nil, "exclusion_keywords"=>nil, "keyword_lifetime"=>0, "comment"=>nil, "bookkeeping_reference"=>nil, "budget_limit"=>5510.5, "unit_price_maximum"=>1.07, "locations"=>nil, "type"=>2, "delivery_external"=>1, "delivery_internal"=>1, "delivery_type"=>0, "deactivated_on"=>nil, "modified"=>"2012-06-14T07:47:15Z", "created"=>"2008-08-13T13:18:12Z", "_meta"=>{"type"=>"Campaign"}} }
+    let(:campaign_data) { {"id"=>123, "bidding_enabled"=>false, "name"=>"Tagesgeld / August 08", "customer_id"=>0, "company_id"=>1, "company_name"=>"Adcloud GmbH", "product_id"=>2564, "product_name"=>"Volkswagen Bank Tagesgeld", "status"=>10, "language_id"=>1, "start_date"=>Date.new(2008,8,15), "end_date"=>Date.new(2008,9,16), "delivery_boost"=>1.0, "frequency_capping"=>0, "frequency_capping_days"=>0, "cookie_lifetime"=>30, "cookie_lifetime_view"=>4, "fallback"=>false, "keywords"=>nil, "exclusion_keywords"=>[], "keyword_lifetime"=>0, "comment"=>nil, "budget_limit"=>5510.5, "unit_price_maximum"=>1.07, "locations"=>[], "type"=>2, "delivery_external"=>true, "delivery_internal"=>true, "delivery_type"=>0, "deactivated_on"=>nil, "modified"=>DateTime.new(2012,6,14,7,47,15), "created"=>DateTime.new(2008,8,13,13,18,12), "_meta"=>{"type"=>"Campaign"}} }
 
-    it 'should create a cmpaign object from hash' do
-      response_data.each {|key, value| subject.new(response_data).send(key).must_equal(value, "Key #{key}")}
+    it 'should create a campaign object from hash' do
+      campaign_data.each do |key, value|
+        subject.new(response_data).send(key).must_equal(value, "Key #{key}")
+      end
     end
 
   end
@@ -63,7 +66,7 @@ describe Adcloud::Campaign do
 
     it "should return an campaign object" do
       subject.connection.expects(:get).with('campaigns/123').returns(response_data)
-      subject.find(123).must_be_instance_of(subject)      
+      subject.find(123).must_be_instance_of(subject)
     end
   end
 end

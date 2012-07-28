@@ -2,26 +2,42 @@ require 'faraday'
 
 module Adcloud
 
-  class InvalidAPIResponse < StandardError; end
+  class InvalidApiResponse < StandardError; end
 
   class ResponseErrorHandler < Faraday::Response::Middleware
 
-    def create_module_and_class(module_name, class_name, superclass, &block)
+    def create_and_register_module(parent = Object, name)
       mod = Module.new
-      registered_module = Object.const_set module_name, mod
+      parent.const_set name, mod
+    end
+
+    def create_and_register_klass(parent, superclass, class_name, &block)
       klass = Class.new superclass, &block
-      registered_module.const_set class_name, klass
+      parent.const_set class_name, klass
+    end
+
+    def create_and_register_modules_from_array(response_array, registered_module = Object)
+      response_array[0..-2].each do |module_item_name|
+        registered_module = create_and_register_module(registered_module, module_item_name)
+      end
+      registered_module
+    end
+
+    def create_exception_from_string(response_string, superclass = StandardError, &block)
+      response_array = response_string.split("::")
+      mod = create_and_register_modules_from_array(response_array)
+      create_and_register_klass(mod, superclass, response_array.last)   
     end
 
     def call(env)
       @app.call(env).on_complete do
         response = env[:response]
-        raise InvalidAPIResponse unless response.body.has_key?("_meta")
+        # TODO Fix this - an metakey is not everytime there
+        # raise InvalidApiResponse unless response.body.has_key?("_meta")
         if response.success?
           response.body
         else
-          module_name, klass_name = response.body["_meta"]["type"].split("::")
-          klass = create_module_and_class(module_name, klass_name, StandardError)
+          klass = create_exception_from_string(response.body["_meta"]["type"])
           raise klass.new({response.body["_meta"]["status"] => response.body["_meta"]["message"]})
         end
       end

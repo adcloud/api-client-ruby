@@ -37,7 +37,6 @@ module Adcloud
     attribute :deactivated_on, DateTime
     attribute :modified, DateTime
     attribute :created, DateTime
-
     # attribute :fixed_price, # missing
     # attribute :mobile_targeting, # missing
 
@@ -49,8 +48,8 @@ module Adcloud
       @errors ||= []
     end
 
-    def self.all(filter_params={})
-      result = connection.get("campaigns", :filter => filter_params)
+    def self.all(params={})
+      result = connection.get("campaigns", :filter => params)
       result["items"].map {| raw_campaign | Campaign.new(raw_campaign) }
     end
 
@@ -59,45 +58,15 @@ module Adcloud
       Campaign.new(result)
     end
 
-    # def create
-    #   status = Adcloud::HttpClient.post('create_campaign', self.campaign_attributes)
-    #   response = case status.code
-    #   when 201
-    #     true
-    #   else 442 # request contains inacceptable advertisement attributes
-    #     self.errors = response.body
-    #     false
-    #   end
-    # end
+    def self.create(params={})
+      result = connection.post("campaigns", params)
+      result
+    end
 
-    # Should we have a method that validates attributes of an object ?
-    # campaign = Adcloud::Campaign.new({:name => 'meine campagnie', :produkt_name => 'schuhe', :budget => 100})
-    # campaign.valid_attributes({:name => 'meine campagnie', :produkt_name => 'schuhe'})
-    # Returns: true/false
-    #
-    #   false: campaign.errors => [:produkt_name => {false, msg}, :name => {false, msg}]
-    #   true: campaign.errors => []
-    #
-    # def validate_attributes(attr = {})
-    #   c = Campaign.new(attr)
-    #   unless c.valid?
-    #     c.errors.each do |e|
-    #        e.keys
-    #     end
-    #   end
-    # end
-
-    # Validates the whole object
-    # def valid?
-    #   status = Adcloud::HttpClient.post('validate_campaign', self.campaign_attributes)
-    #   response = case status.code
-    #   when 200
-    #     true
-    #   else 442 # request contains inacceptable advertisement attributes
-    #     self.errors = response.body
-    #     false
-    #   end
-    # end
+    def self.validate(params={})
+      result = connection.get("validate", :campaign => params)
+      result
+    end
 
   end
 end

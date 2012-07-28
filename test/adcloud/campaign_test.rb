@@ -69,4 +69,18 @@ describe Adcloud::Campaign do
       subject.find(123).must_be_instance_of(subject)
     end
   end
+
+  describe "validate" do
+
+    it "should validate parameters"
+
+  end
+
+  describe "create" do
+
+    it "should create a campaign"
+    
+  end
+
+
 end

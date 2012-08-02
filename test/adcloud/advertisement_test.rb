@@ -3,6 +3,13 @@ require 'test_helper'
 
 describe Adcloud::Advertisement do
 
+  subject { Adcloud::Advertisement }
+
+  let(:connection) { stub() }
+
+  before do
+    subject.stubs(:connection => connection)
+  end
 
   describe "errors" do
 

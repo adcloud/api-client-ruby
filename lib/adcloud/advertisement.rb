@@ -1,32 +1,33 @@
 module Adcloud
   
   class Advertisement < Adcloud::Entity
+    attr_accessor :errors
 
-    attribute :id
-    attribute :product_id
-    attribute :type
-    attribute :advertisement_design_id
-    attribute :target_url
-    attribute :name
-    attribute :logo
-    attribute :image_text
-    attribute :flash
-    attribute :display
-    attribute :tag
-    attribute :postview_type
-    attribute :tag_html
-    attribute :image_alt
-    attribute :text_headline
-    attribute :text_body
-    attribute :text_link
-    attribute :postview_url
-    attribute :keywords
-    attribute :exclusion_keywords
-    attribute :machine_keywords
-    attribute :locations
-    attribute :modified
-    attribute :created
-    attribute :_meta
+    attribute :id, Integer
+    attribute :product_id, Integer
+    attribute :type, String
+    attribute :advertisement_design_id, Integer
+    attribute :target_url, String
+    attribute :name, String
+    attribute :logo, Boolean
+    attribute :image_text, Boolean
+    attribute :flash, Boolean
+    attribute :display, Boolean
+    attribute :tag, Boolean
+    attribute :postview_type, Integer
+    attribute :tag_html, String
+    attribute :image_alt, String
+    attribute :text_headline, String
+    attribute :text_body, String
+    attribute :text_link, String
+    attribute :postview_url, String
+    attribute :keywords, Array
+    attribute :exclusion_keywords, Array
+    attribute :machine_keywords, Array
+    attribute :locations, Array
+    attribute :modified, DateTime
+    attribute :created, DateTime
+    attribute :_meta, Hash
 
     def errors
       @errors ||= []
@@ -39,7 +40,7 @@ module Adcloud
 
     def self.find(id)
       result = connection.get("advertisements/#{id}")
-      Campaign.new(result)
+      Advertisement.new(result)
     end
 
     def self.create(params={})

@@ -34,11 +34,13 @@ module Adcloud
         response = env[:response]
         # TODO Fix this - an metakey is not everytime there
         # raise InvalidApiResponse unless response.body.has_key?("_meta")
+        # puts result["_meta"]["details"]
         if response.success?
           response.body
         else
-          klass = create_exception_from_string(response.body["_meta"]["type"])
-          raise klass.new({response.body["_meta"]["status"] => response.body["_meta"]["message"]})
+          # TODO raise some known erros here
+          # klass = create_exception_from_string(response.body["_meta"]["type"])
+          # raise klass.new({response.body["_meta"]["status"] => response.body["_meta"]["message"]})
         end
       end
     end

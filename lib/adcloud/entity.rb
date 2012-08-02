@@ -11,6 +11,10 @@ module Adcloud
       self.class.connection
     end
 
+    def meta
+      self._meta
+    end
+
   end
 
 end

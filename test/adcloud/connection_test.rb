@@ -8,8 +8,8 @@ describe Adcloud::Connection do
 
   describe "url" do
   
-    it "should be https://api.adcloud.net:80/" do
-      subject.url.must_equal "https://api.adcloud.net:80/v2/"
+    it "should be https://api.adcloud.com:443/" do
+      subject.url.must_equal "https://api.adcloud.com:443/v2/"
     end
   
   end
@@ -31,7 +31,7 @@ describe Adcloud::Connection do
   end
 
   describe "an authenticated connection" do
-    let(:url) { "https://api.adcloud.net:80/v2/whatever" }
+    let(:url) { "https://api.adcloud.com:443/v2/whatever" }
 
     before do
       subject.stubs(:authentication_token).returns("0987654321")

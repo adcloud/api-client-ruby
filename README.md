@@ -69,10 +69,14 @@ This is the official Adcloud API SDK. If you have any problems or requests pleas
 
 ### Validating a campaign
 
-    campaign.valid?
+    campaign.validate?
 
 ### Create/Write a new campaign
 
-    campaign.create
+    campaign.create(params)
+
+e.g.: 
+
+    campaign.create(params)
 
 

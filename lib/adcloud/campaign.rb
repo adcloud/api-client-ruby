@@ -40,10 +40,6 @@ module Adcloud
     # attribute :fixed_price, # missing
     # attribute :mobile_targeting, # missing
 
-    def meta
-      self._meta
-    end
-
     def errors
       @errors ||= []
     end
@@ -64,7 +60,7 @@ module Adcloud
     end
 
     def self.validate(params={})
-      result = connection.get("validate", :campaign => params)
+      result = connection.get("campaigns/validate", :campaign => params)
       result
     end
 

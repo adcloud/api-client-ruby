@@ -18,6 +18,8 @@ module Adcloud
   autoload :Report, "adcloud/report"  
   autoload :Connection, "adcloud/connection"
   autoload :Entity, "adcloud/entity"
+  autoload :Product, "adcloud/product"
+  autoload :Advertisement, "adcloud/advertisement"
 
   class << self
     # Access the logger instance
@@ -34,9 +36,9 @@ module Adcloud
 end
 
 Adcloud.configure do |c|
-  c.port = 80
+  c.port = 443
   c.protocol = 'https'
-  c.host = 'api.adcloud.net'
+  c.host = 'api.adcloud.com'
   c.api_version = "v2"
   c.http_open_timeout = 5
   c.http_read_timeout = 10

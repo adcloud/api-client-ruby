@@ -11,7 +11,7 @@ describe "Adcloud" do
     end
 
     it "should return the default port" do
-      subject.port.must_equal 80
+      subject.port.must_equal 443
     end
 
     it "should return the default protocol" do
@@ -19,7 +19,7 @@ describe "Adcloud" do
     end
 
     it "should return the default host" do
-      subject.host.must_equal 'api.adcloud.net'
+      subject.host.must_equal 'api.adcloud.com'
     end
 
     it "should return the default version" do

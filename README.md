@@ -55,28 +55,36 @@ This is the official Adcloud API SDK. If you have any problems or requests pleas
 
 ## Read all Campaign objects
 
-    Campaign.all
+    Adcloud::Campaign.all
 
-## Campaign
-
-### Creating a New Campaign Object
+## Creating a New Campaign Object
 
     campaign = Adcloud::Campaign.new({x=>x,y=>y,z=>z})
 
-### Read/Find a campaign
+## Read/Find a campaign
 
-    Campaign.find_by_id(42)
+    Adcloud::Campaign.find_by_id(42)
 
-### Validating a campaign
+## Validating a campaign
 
+    campaign = Adcloud::Campaign.new({x=>x,y=>y,z=>z})
     campaign.validate?
 
-### Create/Write a new campaign
+## Create/Write a new campaign
 
-    campaign.create(params)
+    campaign.create({x=>x,y=>y,z=>z})
 
-e.g.: 
+# Advertisement
 
-    campaign.create(params)
+## Creating a New Advertisement Object
 
+    advertisement = Adcloud::Advertisement.new({x=>x,y=>y,z=>z})
 
+## Read/Find a advertisement
+
+    Adcloud::Advertisement.find_by_id(42)
+
+## Create/Write a new advertisement
+
+    advertisement = Adcloud::Advertisement.new({x=>x,y=>y,z=>z})
+    advertisement.create({x=>x,y=>y,z=>z})

@@ -44,8 +44,8 @@ module Adcloud
       @errors ||= []
     end
 
-    def self.all(params={})
-      result = connection.get("campaigns", :filter => params)
+    def self.all(params = {}, page = 1, per_page = 50)
+      result = connection.get("campaigns", :filter => params, :page => page, :per_page => :per_page)
       result["items"].map {| raw_campaign | Campaign.new(raw_campaign) }
     end
 
@@ -59,7 +59,7 @@ module Adcloud
       result
     end
 
-    def self.validate(params={})
+    def validate(params={})
       result = connection.get("campaigns/validate", :campaign => params)
       result
     end

@@ -57,6 +57,28 @@ This is the official Adcloud API SDK. If you have any problems or requests pleas
 
     Adcloud::Campaign.all
 
+### Filtering
+
+    Adcloud::Campaign.all({:status => true})
+
+Available filter keys are:
+
+* status
+* customer
+* company
+* name _Provide a search string_
+* country
+* product
+* type
+* destination
+* delivery_type
+* managed
+
+### Pagination
+
+    Adcloud::Campaign.all({}, page, per_page)
+    Adcloud::Campaign.all({:status => true}, 2, 10)
+
 ## Creating a New Campaign Object
 
     campaign = Adcloud::Campaign.new({x=>x,y=>y,z=>z})
@@ -68,17 +90,34 @@ This is the official Adcloud API SDK. If you have any problems or requests pleas
 ## Validating a campaign
 
     campaign = Adcloud::Campaign.new({x=>x,y=>y,z=>z})
-    campaign.validate?
+    campaign.validate
+    campaign.valid?
 
 ## Create/Write a new campaign
 
     campaign.create({x=>x,y=>y,z=>z})
+    campaign.errors
 
 # Advertisement
 
-## Creating a New Advertisement Object
+## Read all advertisement objects
 
-    advertisement = Adcloud::Advertisement.new({x=>x,y=>y,z=>z})
+    Adcloud::Advertisement.all
+
+### Filtering
+
+    Adcloud::Advertisement.all({:active => true})
+
+Available filter keys are:
+
+* campaign
+* product
+* active
+
+### Pagination
+
+    Adcloud::Advertisement.all({}, page, per_page)
+    Adcloud::Advertisement.all({:status => true}, 2, 10)
 
 ## Read/Find a advertisement
 

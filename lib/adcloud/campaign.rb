@@ -41,7 +41,7 @@ module Adcloud
     # attribute :mobile_targeting, # missing
 
     def errors
-      @errors ||= []
+      @errors ||= {}
     end
 
     def self.all(filter = {}, page = 1, per_page = 50)
@@ -54,25 +54,32 @@ module Adcloud
       Campaign.new(result)
     end
 
-    # TODO
-    def self.create(params={})
-      result = connection.post("campaigns", params)
-      # Campaign.new(raw_campaign)
-      # @errors << result
-      # result
+    def self.create(params = {})
+      campaign = Campaign.new(params)
+      campaign.create
+      campaign
     end
 
-    # TODO
+    def create
+      clean_attributes = self.attributes
+      clean_attributes.delete(:id)
+      clean_attributes.delete(:_meta)
+      result = connection.post("campaigns", { :campaign => clean_attributes })
+      self.id = result["id"]
+      true
+    rescue Adcloud::BadRequestError => exception
+      @errors = self.errors.merge(exception.details)
+      false
+    end
+
     def validate
-      # params = self.attributes
-      # result = connection.get("campaigns/validate", params)
-      # @errors << result
+      result = connection.get("campaigns/validate", self.attributes)
+      @errors = self.errors.merge(result["_meta"]["details"]) if result["_meta"]["status"] == 226
     end
 
-    # TODO
     def valid?
-      # self.validate
-      # errors.blank? 
+      self.validate
+      self.errors.empty? 
     end
 
   end

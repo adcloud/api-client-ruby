@@ -81,7 +81,9 @@ describe Adcloud::Campaign do
   describe "create" do
 
     it "should create a campaign"
-    
+
+    it "should not create a campaign"
+     
   end
 
 end

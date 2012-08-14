@@ -74,12 +74,16 @@ module Adcloud
 
     def validate
       result = connection.get("campaigns/validate", self.attributes)
-      @errors = self.errors.merge(result["_meta"]["details"]) if result["_meta"]["status"] == 226
+      if result && result["_meta"] && result["_meta"]["status"] == 226
+        @errors = self.errors.merge(result["_meta"]["details"])
+      else
+        raise AdcloudSucks::InvalidApiResponse.new('Empty repsonse for campaign validation')
+      end
     end
 
     def valid?
       self.validate
-      self.errors.empty? 
+      self.errors.empty?
     end
 
   end

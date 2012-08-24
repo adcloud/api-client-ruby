@@ -83,13 +83,17 @@ Alternatively, you could use the static method
 Customer
 --------
 
-Create a customer object
+Get all customers
 
-    Customer.create({:name => "AdKlaus"})
+    Customer.all
 
 Get a customer object
 
-    Customer.find_by_id(42)
+    Customer.find(42)
+
+Create a customer object
+
+    Customer.create({:name => "AdKlaus"})
 
 
 Advertisement

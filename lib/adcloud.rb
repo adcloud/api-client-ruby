@@ -10,16 +10,17 @@ module Adcloud
   include ActiveSupport::Configurable
 
   autoload :Ad, "adcloud/ad"
-  autoload :Attachment, "adcloud/attachment"
-  autoload :Campaign, "adcloud/campaign"
-  autoload :Authentication, "adcloud/authentication"
-  autoload :Report, "adcloud/report"
-  autoload :Connection, "adcloud/connection"
-  autoload :Entity, "adcloud/entity"
-  autoload :Product, "adcloud/product"
   autoload :Advertisement, "adcloud/advertisement"
   autoload :ApiError, "adcloud/api_error"
+  autoload :Attachment, "adcloud/attachment"
+  autoload :Authentication, "adcloud/authentication"
+  autoload :Campaign, "adcloud/campaign"
+  autoload :Connection, "adcloud/connection"
+  autoload :Customer, "adcloud/customer"
+  autoload :Entity, "adcloud/entity"
   autoload :ExceptionRaiser, "adcloud/exception_raiser"
+  autoload :Product, "adcloud/product"
+  autoload :Report, "adcloud/report"
 
   module AdcloudSucks; class InvalidApiResponse < StandardError; end; end
   class BadRequestError < ApiError; end

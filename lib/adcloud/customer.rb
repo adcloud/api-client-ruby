@@ -1,7 +1,13 @@
 module Adcloud
-  
+
   class Customer < Adcloud::Entity
-    # * /v2/customers
-    # * /v2/customers/:id    
+    self.api_endpoint = 'customers'
+
+    attribute :_meta, Hash
+    attribute :id, Integer
+    attribute :name, Boolean
+    attribute :modified, DateTime
+    attribute :created, DateTime
   end
+
 end

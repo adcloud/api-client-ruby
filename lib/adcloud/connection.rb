@@ -1,5 +1,5 @@
 module Adcloud
-  
+
   class Connection < Adcloud::Entity
 
     attr_accessor :authentication
@@ -24,9 +24,10 @@ module Adcloud
       auth_header = auth && { :Authorization =>  "Bearer #{authentication_token}" } || {}
       connection ||= Faraday.new(:url => url, :headers => {}.merge(auth_header)) do |faraday|
         faraday.request  :url_encoded                     # form-encode POST params
-        faraday.response :logger                          # log requests to STDOUT
+        # log requests to STDOUT
+        faraday.response :logger if Adcloud.config.debug
         faraday.use ResponseErrorHandler
-        faraday.adapter  Faraday.default_adapter          # make requests with Net::HTTP        
+        faraday.adapter  Faraday.default_adapter          # make requests with Net::HTTP
         faraday.response :json, :content_type => /\bjson$/
       end
     end
@@ -38,7 +39,7 @@ module Adcloud
 
     def get(path, params = {})
       response = connection.get path, params
-      response.body      
+      response.body
     end
 
   end

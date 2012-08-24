@@ -4,6 +4,7 @@ require 'test_helper'
 describe Adcloud::Campaign do
   subject { Adcloud::Campaign }
 
+  let(:campaign) { subject.new }
   let(:connection) { stub() }
 
   before do
@@ -71,17 +72,93 @@ describe Adcloud::Campaign do
   end
 
   describe "validate" do
+    it 'should validate against the api' do
+      connection.expects(:get).with('campaigns/validate', campaign.attributes).returns({'_meta' => { 'status' => 226, 'details' => {}}})
+      campaign.validate
+    end
 
-    it "should validate parameters"
+    it 'should populate the errors hash' do
+      response_data = {'_meta' => { 'status' => 226, 'details' => { 'company_id' => ['must be present'] } } }
+      connection.expects(:get).with('campaigns/validate', campaign.attributes).returns(response_data)
+      campaign.validate
+      campaign.errors['company_id'].must_equal ['must be present']
+    end
 
-    it "should check if campaign is valid"
-
+    it 'raises an exception when the response is not well formatted' do
+      connection.expects(:get).with('campaigns/validate', campaign.attributes)
+      -> { campaign.validate }.must_raise(Adcloud::AdcloudSucks::InvalidApiResponse)
+    end
   end
 
-  describe "create" do
+  describe '#valid?' do
+    it 'validates the model' do
+      campaign.expects(:validate)
+      campaign.valid?
+    end
 
-    it "should create a campaign"
-    
+    it 'returns true when object is valid' do
+      campaign.stubs(:validate)
+      campaign.errors = {}
+      campaign.valid?.must_equal true
+    end
+
+    it 'returns false when the object is invalid' do
+      campaign.stubs(:validate)
+      campaign.errors = { company_id: ['must be present'] }
+      campaign.valid?.must_equal false
+    end
+  end
+
+  describe '#create' do
+
+    describe 'when submitting a valid campaign' do
+      let(:response) { { '_meta' => { 'status' => 200 }, 'id' => 1 } }
+
+      it 'sends a request to the api' do
+        campaign = subject.new
+        attributes = campaign.attributes
+        attributes.delete(:id)
+        attributes.delete(:_meta)
+        connection.expects(:post).with('campaigns', { :campaign => attributes }).returns(response)
+        campaign.create
+      end
+
+      it 'sets the campaign id' do
+        connection.stubs(:post).returns(response)
+        campaign = subject.new
+        campaign.create
+        campaign.id.must_equal 1
+      end
+
+      it 'returns true' do
+        connection.stubs(:post).returns(response)
+        subject.new.create.must_equal true
+      end
+    end
+
+    describe 'when submitting an invalid campaign' do
+      let(:error) { Adcloud::BadRequestError.new(stub(:body => {'_meta' => { 'details' => {:name => ['cannot be empty']}}})) }
+      before { connection.stubs(:post).raises(error) }
+
+      it 'returns false' do
+        subject.new.create.must_equal false
+      end
+
+      it 'sets the errors hash' do
+        campaign = subject.new
+        campaign.create
+        campaign.errors.must_equal({ :name => ['cannot be empty'] })
+      end
+    end
+  end
+
+  describe '.create' do
+    it 'creates a new campaign' do
+      campaign = subject.new
+      subject.expects(:new).returns(campaign)
+      campaign.expects(:create)
+      subject.create.must_equal campaign
+    end
   end
 
 end

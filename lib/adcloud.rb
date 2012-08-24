@@ -1,14 +1,12 @@
 require 'faraday'
 require 'faraday_middleware'
 require 'adcloud/response_error_handler'
-
 require 'logger'
-
 require 'active_support/configurable'
 require 'virtus'
 
 module Adcloud
-  
+
   include ActiveSupport::Configurable
 
   autoload :Ad, "adcloud/ad"
@@ -20,7 +18,13 @@ module Adcloud
   autoload :Entity, "adcloud/entity"
   autoload :Product, "adcloud/product"
   autoload :Advertisement, "adcloud/advertisement"
+  autoload :ApiError, "adcloud/api_error"
+  autoload :ExceptionRaiser, "adcloud/exception_raiser"
 
+  module AdcloudSucks; class InvalidApiResponse < StandardError; end; end
+  class BadRequestError < ApiError; end
+  class ServerError < ApiError; end
+  
   class << self
     # Access the logger instance
     def logger

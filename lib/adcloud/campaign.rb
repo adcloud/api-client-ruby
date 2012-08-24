@@ -40,39 +40,77 @@ module Adcloud
     # attribute :fixed_price, # missing
     # attribute :mobile_targeting, # missing
 
-    def errors
-      @errors ||= []
-    end
 
+    #
+    # Static class methods
+    #
+
+    # @return [Array<Campaign>] Campaigns matching the criteria or all
     def self.all(filter = {}, page = 1, per_page = 50)
       result = connection.get("campaigns", :filter => filter, :page => page, :per_page => per_page)
       result["items"].map {| raw_campaign | Campaign.new(raw_campaign) }
     end
 
+    # @return [Campaign] The campaign with the unique identifier
     def self.find(id)
       result = connection.get("campaigns/#{id}")
       Campaign.new(result)
     end
 
-    # TODO
-    def self.create(params={})
-      result = connection.post("campaigns", params)
-      # Campaign.new(raw_campaign)
-      # @errors << result
-      # result
+    # @return [Campaign] Object has errors when creation failed
+    def self.create(params = {})
+      campaign = Campaign.new(params)
+      campaign.create
+      campaign
     end
 
-    # TODO
+
+    #
+    # Instance methods
+    #
+
+    # @return [Hash] Errors hash
+    def errors
+      @errors ||= {}
+    end
+
+    # @return [Boolean] True when successfully created - otherwise false
+    def create
+      result = connection.post('campaigns', { :campaign => attributes_for_create })
+      self.id = result['id']
+      true
+    rescue Adcloud::BadRequestError => ex
+      derive_errors_from_error(ex)
+      false
+    end
+
+    # @return [void] Validate the campaign against the api
     def validate
-      # params = self.attributes
-      # result = connection.get("campaigns/validate", params)
-      # @errors << result
+      result = connection.get("campaigns/validate", self.attributes)
+      if result && result["_meta"] && result["_meta"]["status"] == 226
+        @errors = self.errors.merge(result["_meta"]["details"])
+      else
+        raise AdcloudSucks::InvalidApiResponse.new('Empty response for campaign validation')
+      end
     end
 
-    # TODO
+    # @return [Boolean] True when campaign is valid - otherwise false
     def valid?
-      # self.validate
-      # errors.blank? 
+      self.validate
+      self.errors.empty?
+    end
+
+
+    private
+
+    # Set the campaign errors from the api response
+    def derive_errors_from_error(error)
+      @errors = self.errors.merge(error.details)
+    end
+
+    # @return [Hash] Attributes without those required for campaign creation
+    def attributes_for_create
+      self.attributes.reject { |i| [:id, :_meta].include?(i) }
     end
 
   end

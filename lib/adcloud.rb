@@ -13,7 +13,7 @@ module Adcloud
   autoload :Attachment, "adcloud/attachment"
   autoload :Campaign, "adcloud/campaign"
   autoload :Authentication, "adcloud/authentication"
-  autoload :Report, "adcloud/report"  
+  autoload :Report, "adcloud/report"
   autoload :Connection, "adcloud/connection"
   autoload :Entity, "adcloud/entity"
   autoload :Product, "adcloud/product"
@@ -23,8 +23,9 @@ module Adcloud
 
   module AdcloudSucks; class InvalidApiResponse < StandardError; end; end
   class BadRequestError < ApiError; end
+  class NotFoundError < ApiError; end
   class ServerError < ApiError; end
-  
+
   class << self
     # Access the logger instance
     def logger

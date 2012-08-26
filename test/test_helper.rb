@@ -17,7 +17,7 @@ rescue Bundler::BundlerError => e
   exit e.status_code
 end
 
-MiniTest::Reporters.use! MiniTest::Reporters::SpecReporter.new
+MiniTest::Reporters.use! MiniTest::Reporters::ProgressReporter.new
 
 $LOAD_PATH.unshift(File.join(File.dirname(__FILE__), '..', 'lib'))
 $LOAD_PATH.unshift(File.dirname(__FILE__))

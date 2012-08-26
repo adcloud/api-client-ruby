@@ -12,6 +12,7 @@ module Adcloud
         if response.success?
           response.body
         else
+          Adcloud.logger.debug { response.inspect }
           ExceptionRaiser.new(response)
         end
       end

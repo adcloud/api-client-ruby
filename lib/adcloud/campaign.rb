@@ -1,8 +1,5 @@
 module Adcloud
-
   class Campaign < Adcloud::Entity
-    self.api_endpoint = 'campaigns'
-
     attribute :_meta, Hash
     attribute :id, Integer
     attribute :bidding_enabled, Boolean
@@ -40,7 +37,6 @@ module Adcloud
     # attribute :fixed_price, # missing
     # attribute :mobile_targeting, # missing
 
-
     # @return [void] Validate the campaign against the api
     def validate
       result = connection.get("campaigns/validate", self.attributes)
@@ -56,6 +52,5 @@ module Adcloud
       self.validate
       self.errors.empty?
     end
-
   end
 end

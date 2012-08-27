@@ -17,7 +17,7 @@ module Adcloud
 
     # @return [Boolean] True when successfully created - otherwise false
     def create
-      result = connection.post(self.class.api_endpoint, { self.class.name_without_module.downcase => attributes_for_create })
+      result = connection.post(self.class.api_endpoint, { self.class.name.demodulize.downcase => attributes_for_create })
       self.id = result['id']
       true
     rescue Adcloud::BadRequestError => ex
@@ -27,6 +27,10 @@ module Adcloud
 
     class << self
       attr_accessor :api_endpoint, :connection
+
+      def api_endpoint
+        @api_endpoint ||= self.name.demodulize.tableize
+      end
 
       def connection
         @connection ||= Connection.new
@@ -49,10 +53,6 @@ module Adcloud
         entity = self.new(params)
         entity.create
         entity
-      end
-
-      def name_without_module
-        self.name.split('::').last
       end
     end
 

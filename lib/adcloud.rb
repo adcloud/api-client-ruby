@@ -3,6 +3,7 @@ require 'faraday_middleware'
 require 'adcloud/response_error_handler'
 require 'logger'
 require 'active_support/configurable'
+require 'active_support/inflector'
 require 'virtus'
 
 module Adcloud

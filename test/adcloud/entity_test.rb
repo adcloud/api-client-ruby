@@ -4,7 +4,7 @@ require 'test_helper'
 describe Adcloud::Entity do
 
   class Car < Adcloud::Entity
-    self.api_endpoint = 'cars'
+    #self.api_endpoint = 'cars'
     attribute :id, Integer
     attribute :name, String
   end

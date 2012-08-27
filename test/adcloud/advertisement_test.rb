@@ -3,20 +3,9 @@ require 'test_helper'
 
 describe Adcloud::Advertisement do
 
-  subject { Adcloud::Advertisement }
-
-  let(:connection) { stub() }
-
-  before do
-    subject.stubs(:connection => connection)
+  it 'should set the correct api endpoint' do
+    Adcloud::Advertisement.api_endpoint.must_equal 'advertisements'
   end
 
-  describe "errors" do
-
-    it "should be empty" do
-      subject.new.errors.must_be_empty
-    end
-
-  end
-  
+  # for more tests checkout entity tests
 end

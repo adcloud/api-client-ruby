@@ -1,9 +1,9 @@
 module Adcloud
 
-  class ApiError < StandardError; 
+  class ApiError < StandardError;
 
     attr_accessor :meta, :response
-    
+
     def initialize(response)
       self.response = response
     end

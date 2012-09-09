@@ -37,7 +37,7 @@ describe Adcloud::Authentication do
   describe "is successful" do
 
     it "should return a token" do
-      stub_request(:post, "https://api.adcloud.com:443/v2/oauth/access_token").with(:body => {"client_id"=>"0987654321", "client_secret"=>"1234567890", "grant_type"=>"none"}, :headers => {'Accept'=>'*/*', 'Content-Type'=>'application/x-www-form-urlencoded', 'User-Agent'=>'Ruby'}).to_return(:status => 200, :body => {"_meta" => {}, "access_token" => "bab0e5c477f211c4612345678907498b6e55600","scope" => ""}, :headers => {})
+      stub_request(:post, "https://api.adcloud.com:443/v2/oauth/access_token").with(:body => {"client_id"=>"0987654321", "client_secret"=>"1234567890", "grant_type"=>"none"}, :headers => {'Accept'=>'*/*', 'Content-Type'=>'application/x-www-form-urlencoded', 'User-Agent'=>'Ruby'}).to_return(:status => 200, :body => {"_meta" => {"access_token" => "bab0e5c477f211c4612345678907498b6e55600"}, "access_token" => "bab0e5c477f211c4612345678907498b6e55600","scope" => ""}, :headers => {})
       adcloud_auth = Adcloud::Authentication.new(:client_id => "0987654321", :client_secret => "1234567890")
       adcloud_auth.authenticate!
       adcloud_auth.token.must_equal "bab0e5c477f211c4612345678907498b6e55600"

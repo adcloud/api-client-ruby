@@ -27,6 +27,7 @@ module Adcloud
   class BadRequestError < ApiError; end
   class NotFoundError < ApiError; end
   class ServerError < ApiError; end
+  class Unauthorized < ApiError; end
 
   class << self
     # Access the logger instance

@@ -6,6 +6,8 @@ module Adcloud
       case response.status
       when 400
         raise Adcloud::BadRequestError.new(response)
+      when 401
+        raise Adcloud::Unauthorized.new(response)
       when 404
         raise Adcloud::NotFoundError.new(response)
       when 500

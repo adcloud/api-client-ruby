@@ -127,6 +127,20 @@ Create/Write a new advertisement
     advertisement = Adcloud::Advertisement.new({x=>x,y=>y,z=>z})
     advertisement.create({x=>x,y=>y,z=>z})
 
+Media Files
+-----------
+
+Create a new media file with
+
+    Adcloud::MediaFile.create(
+      uploaded_file: 'http://yourhost.com/yourfile.ext'
+      product_id: 123,
+      ad_id: 456,
+      flash: false,
+      display: false
+    end
+
+where ```uploaded_file``` is a publicly accessible url to an image file.
 
 TODO
 ----

@@ -152,7 +152,7 @@ Create a new product
 Topic
 -----
 
-Read aall topics
+Read all topics
 
     topics = Adcloud::Topic.all
 

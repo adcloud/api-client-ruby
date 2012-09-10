@@ -22,6 +22,8 @@ module Adcloud
   autoload :ExceptionRaiser, "adcloud/exception_raiser"
   autoload :Product, "adcloud/product"
   autoload :Report, "adcloud/report"
+  autoload :Topic, "adcloud/topic"
+  autoload :TopicDiscount, "adcloud/topic_discount"
 
   module AdcloudUnknownAPIError; class InvalidApiResponse < StandardError; end; end
   class BadRequestError < ApiError; end

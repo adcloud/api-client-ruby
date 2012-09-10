@@ -1,5 +1,18 @@
 module Adcloud
   class Campaign < Adcloud::Entity
+    TYPES = {
+      cpc: 2,
+      cpx: 3,
+      cpx_plus: 4,
+      cpm: 5,
+      fixed_daily_costs: 6
+    }
+
+    DELIVERY_TYPES = {
+      topic: 1,
+      channel: 2
+    }
+
     attribute :_meta, Hash
     attribute :id, Integer
     attribute :bidding_enabled, Boolean

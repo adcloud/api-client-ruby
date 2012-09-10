@@ -127,6 +127,28 @@ Create/Write a new advertisement
     advertisement = Adcloud::Advertisement.new({x=>x,y=>y,z=>z})
     advertisement.create({x=>x,y=>y,z=>z})
 
+Topic
+-----
+
+Read aall topics
+
+    topics = Adcloud::Topic.all
+
+And a single topic
+
+    topic = Adcloud::Topic.find(123)
+
+Topics provide their name in various languages
+
+    topic.names['en_gb'] # english name
+    topic.names['de_de'] # german name
+    ...
+
+Prices, reach, discounts are provided for each country
+
+    topic.discounts['gb'] # Values for England
+    topic.discounts['de'] # Values for Germany
+
 
 TODO
 ----

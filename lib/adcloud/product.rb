@@ -1,7 +1,10 @@
 module Adcloud
-  
   class Product < Adcloud::Entity
-    # * /v2/products
-    # * /v2/products/:id
+    attribute :id, Integer
+    attribute :name, String
+    attribute :customer_id, Integer
+    attribute :default_prio, Integer
+    attribute :modified, DateTime
+    attribute :created, DateTime
   end
 end

@@ -22,6 +22,7 @@ module Adcloud
   autoload :MediaFile, "adcloud/media_file"
   autoload :Product, "adcloud/product"
   autoload :Report, "adcloud/report"
+  autoload :ReportEntry, "adcloud/report_entry"
 
   module AdcloudSucks; class InvalidApiResponse < StandardError; end; end
   class BadRequestError < ApiError; end

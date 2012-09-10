@@ -127,6 +127,27 @@ Create/Write a new advertisement
     advertisement = Adcloud::Advertisement.new({x=>x,y=>y,z=>z})
     advertisement.create({x=>x,y=>y,z=>z})
 
+Product
+-------
+
+Get all products
+
+    Adcloud::Product.all
+
+Get a single product
+
+    Adcloud::Product.find(123)
+
+Create a new product
+
+    product = Adcloud::Product.create(name: 'Product name', customer_id: 123)
+    # or
+    product = Adcloud::Product.new(name: 'Product name', customer_id: 123)
+    if product.create
+        # ...
+    else
+        puts product.errors.inspect
+    end
 
 TODO
 ----

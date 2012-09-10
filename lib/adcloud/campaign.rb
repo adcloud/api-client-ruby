@@ -39,7 +39,7 @@ module Adcloud
 
     # @return [void] Validate the campaign against the api
     def validate
-      result = connection.get("campaigns/validate", self.attributes)
+      result = connection.get('campaigns/validate', { campaign: self.attributes_for_create })
       if result && result["_meta"] && result["_meta"]["status"] == 226
         @errors = self.errors.merge(result["_meta"]["details"])
       else

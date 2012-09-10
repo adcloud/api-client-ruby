@@ -130,7 +130,7 @@ Create/Write a new advertisement
 Topic
 -----
 
-Read aall topics
+Read all topics
 
     topics = Adcloud::Topic.all
 

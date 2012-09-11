@@ -5,7 +5,7 @@ module Adcloud
     attribute :modified, DateTime
     attribute :created, DateTime
     attribute :discounts, Hash
-    attribute :names, Array[Hash]
+    attribute :names, Hash
 
     def discounts=(data)
       @discounts = data.reduce({}) do |hash, raw_discount|
@@ -15,12 +15,5 @@ module Adcloud
       end
     end
 
-    # @return [Hash<String, String>] Locale as key and name as value
-    def names=(data)
-      @names = data.reduce({}) do |hash, item|
-        hash[item['locale']] = item['content']
-        hash
-      end
-    end
   end
 end

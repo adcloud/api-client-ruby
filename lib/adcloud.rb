@@ -25,6 +25,8 @@ module Adcloud
   autoload :ReportEntry, "adcloud/report_entry"
   autoload :Topic, "adcloud/topic"
   autoload :TopicDiscount, "adcloud/topic_discount"
+  autoload :Webhook, "adcloud/webhook"
+  autoload :WebhookConfig, "adcloud/webhook_config"
   autoload :WebhookEvent, "adcloud/webhook_event"
 
   module AdcloudSucks; class InvalidApiResponse < StandardError; end; end

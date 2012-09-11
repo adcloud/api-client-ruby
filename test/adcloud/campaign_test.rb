@@ -12,20 +12,22 @@ describe Adcloud::Campaign do
   end
 
   describe "validate" do
+    let(:request_attributes) { campaign.attributes.select { |k, v| ![:_meta, :id].include?(k) } }
+
     it 'should validate against the api' do
-      connection.expects(:get).with('campaigns/validate', campaign.attributes).returns({'_meta' => { 'status' => 226, 'details' => {}}})
+      connection.expects(:get).with('campaigns/validate', { campaign: request_attributes }).returns({'_meta' => { 'status' => 226, 'details' => {}}})
       campaign.validate
     end
 
     it 'should populate the errors hash' do
       response_data = {'_meta' => { 'status' => 226, 'details' => { 'company_id' => ['must be present'] } } }
-      connection.expects(:get).with('campaigns/validate', campaign.attributes).returns(response_data)
+      connection.stubs(:get).returns(response_data)
       campaign.validate
       campaign.errors['company_id'].must_equal ['must be present']
     end
 
     it 'raises an exception when the response is not well formatted' do
-      connection.expects(:get).with('campaigns/validate', campaign.attributes)
+      connection.expects(:get).with('campaigns/validate', { campaign: request_attributes })
       -> { campaign.validate }.must_raise(Adcloud::AdcloudSucks::InvalidApiResponse)
     end
   end

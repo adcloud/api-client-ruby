@@ -17,8 +17,10 @@ module Adcloud
 
     # @return [Boolean] True when successfully created - otherwise false
     def create
-      result = connection.post(self.class.api_endpoint, { self.class.name.demodulize.downcase => attributes_for_create })
-      self.id = result['id']
+      result = connection.post(self.class.api_endpoint, { self.class.api_name => attributes_for_create })
+      if self.respond_to?(:id=) && !result['id'].nil?
+        self.id = result['id']
+      end
       true
     rescue Adcloud::BadRequestError => ex
       derive_errors_from_error(ex)
@@ -30,6 +32,10 @@ module Adcloud
 
       def api_endpoint
         @api_endpoint ||= self.name.demodulize.tableize
+      end
+
+      def api_name
+        self.name.demodulize.underscore
       end
 
       def connection
@@ -61,7 +67,7 @@ module Adcloud
       @errors || {}
     end
 
-    private
+    protected
 
     # Set the campaign errors from the api response
     def derive_errors_from_error(error)

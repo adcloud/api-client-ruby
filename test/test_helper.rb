@@ -5,7 +5,7 @@ require 'rubygems'
 require 'bundler'
 require 'minitest/mock'
 require 'minitest/autorun'
-require "minitest/reporters"
+require 'minitest/pride'
 require 'webmock/minitest'
 require 'mocha'
 
@@ -16,8 +16,6 @@ rescue Bundler::BundlerError => e
   $stderr.puts "Run `bundle install` to install missing gems"
   exit e.status_code
 end
-
-MiniTest::Reporters.use! MiniTest::Reporters::ProgressReporter.new
 
 $LOAD_PATH.unshift(File.join(File.dirname(__FILE__), '..', 'lib'))
 $LOAD_PATH.unshift(File.dirname(__FILE__))

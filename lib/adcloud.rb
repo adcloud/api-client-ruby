@@ -55,4 +55,6 @@ Adcloud.configure do |c|
   c.http_open_timeout = 5
   c.http_read_timeout = 10
   c.debug = false
+  c.webhooks = Adcloud::WebhookConfig.new
+  c.webhooks.filter_tests = true
 end

@@ -149,6 +149,44 @@ Create a new product
         puts product.errors.inspect
     end
 
+=======
+Media Files
+-----------
+
+Create a new media file with
+
+    Adcloud::MediaFile.create(
+      uploaded_file: 'http://yourhost.com/yourfile.ext'
+      product_id: 123,
+      ad_id: 456,
+      flash: false,
+      display: false
+    end
+
+where ```uploaded_file``` is a publicly accessible url to an image file.
+
+Topic
+-----
+
+Read all topics
+
+    topics = Adcloud::Topic.all
+
+And a single topic
+
+    topic = Adcloud::Topic.find(123)
+
+Topics provide their name in various languages
+
+    topic.names['en_gb'] # english name
+    topic.names['de_de'] # german name
+    ...
+
+Prices, reach, discounts are provided for each country
+
+    topic.discounts['gb'] # Values for England
+    topic.discounts['de'] # Values for Germany
+
 TODO
 ----
 

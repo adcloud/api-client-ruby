@@ -1,5 +1,18 @@
 module Adcloud
   class Campaign < Adcloud::Entity
+    TYPES = {
+      cpc: 2,
+      cpx: 3,
+      cpx_plus: 4,
+      cpm: 5,
+      fixed_daily_costs: 6
+    }
+
+    DELIVERY_TYPES = {
+      topic: 1,
+      channel: 2
+    }
+
     attribute :_meta, Hash
     attribute :id, Integer
     attribute :bidding_enabled, Boolean
@@ -39,7 +52,7 @@ module Adcloud
 
     # @return [void] Validate the campaign against the api
     def validate
-      result = connection.get("campaigns/validate", self.attributes)
+      result = connection.get('campaigns/validate', { campaign: self.attributes_for_create })
       if result && result["_meta"] && result["_meta"]["status"] == 226
         @errors = self.errors.merge(result["_meta"]["details"])
       else

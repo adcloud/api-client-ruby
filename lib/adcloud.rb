@@ -13,15 +13,18 @@ module Adcloud
   autoload :Ad, "adcloud/ad"
   autoload :Advertisement, "adcloud/advertisement"
   autoload :ApiError, "adcloud/api_error"
-  autoload :Attachment, "adcloud/attachment"
   autoload :Authentication, "adcloud/authentication"
   autoload :Campaign, "adcloud/campaign"
   autoload :Connection, "adcloud/connection"
   autoload :Customer, "adcloud/customer"
   autoload :Entity, "adcloud/entity"
   autoload :ExceptionRaiser, "adcloud/exception_raiser"
+  autoload :MediaFile, "adcloud/media_file"
   autoload :Product, "adcloud/product"
   autoload :Report, "adcloud/report"
+  autoload :ReportEntry, "adcloud/report_entry"
+  autoload :Topic, "adcloud/topic"
+  autoload :TopicDiscount, "adcloud/topic_discount"
 
   module AdcloudSucks; class InvalidApiResponse < StandardError; end; end
   class BadRequestError < ApiError; end

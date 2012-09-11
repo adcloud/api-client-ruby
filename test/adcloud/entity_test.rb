@@ -135,4 +135,25 @@ describe Adcloud::Entity do
     end
   end
 
+  describe '.api_name' do
+    it 'returns the class name in lowercase' do
+      Car.api_name.must_equal 'car'
+    end
+
+    it 'removes the namespace' do
+      module MyTest
+        class Truck < Adcloud::Entity
+        end
+      end
+      MyTest::Truck.api_name.must_equal 'truck'
+    end
+
+    it 'transforms camel case to underscore' do
+      class AirPlane < Adcloud::Entity
+      end
+      AirPlane.api_name.must_equal 'air_plane'
+    end
+
+  end
+
 end

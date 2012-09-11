@@ -25,6 +25,7 @@ module Adcloud
   autoload :ReportEntry, "adcloud/report_entry"  
   autoload :Topic, "adcloud/topic"
   autoload :TopicDiscount, "adcloud/topic_discount"
+  autoload :WebhookEvent, "adcloud/webhook_event"
 
   module AdcloudUnknownAPIError; class InvalidApiResponse < StandardError; end; end
   class BadRequestError < ApiError; end

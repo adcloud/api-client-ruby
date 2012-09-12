@@ -6,20 +6,14 @@ describe Adcloud::WebhookEvent do
   subject { Adcloud::WebhookEvent.new(payload) }
 
   describe '#type' do
-    it 'returns the event type' do
-      subject.type.must_equal 'Test.create'
-    end
+    specify { subject.type.must_equal 'Test.create' }
   end
 
   describe '#data' do
-    it 'returns only the event data' do
-      subject.data.must_equal({ 'id' => 1, 'name' => 'Test run' })
-    end
+    specify { subject.data.must_equal({ 'id' => 1, 'name' => 'Test run' }) }
   end
 
   describe '#meta' do
-    it 'returns the event meta data' do
-      subject.meta.must_equal({ 'event' => 'Test.create', 'foo' => 'bar' })
-    end
+    specify { subject.meta.must_equal({ 'event' => 'Test.create', 'foo' => 'bar' }) }
   end
 end

@@ -25,6 +25,9 @@ module Adcloud
   autoload :ReportEntry, "adcloud/report_entry"
   autoload :Topic, "adcloud/topic"
   autoload :TopicDiscount, "adcloud/topic_discount"
+  autoload :Webhook, "adcloud/webhook"
+  autoload :WebhookConfig, "adcloud/webhook_config"
+  autoload :WebhookEvent, "adcloud/webhook_event"
 
   module AdcloudSucks; class InvalidApiResponse < StandardError; end; end
   class BadRequestError < ApiError; end
@@ -35,7 +38,7 @@ module Adcloud
   class << self
     # Access the logger instance
     def logger
-      @@logger ||= Adcloud.config.logger || Logger.new(STDOUT)
+      @@logger ||= (defined?(Rails) && Rails.logger) || Adcloud.config.logger || Logger.new(STDOUT)
     end
 
     # Allow to override the logger
@@ -54,4 +57,6 @@ Adcloud.configure do |c|
   c.http_open_timeout = 5
   c.http_read_timeout = 10
   c.debug = false
+  c.webhooks = Adcloud::WebhookConfig.new
+  c.webhooks.filter_tests = true
 end

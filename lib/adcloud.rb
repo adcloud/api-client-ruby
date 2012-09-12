@@ -38,7 +38,7 @@ module Adcloud
   class << self
     # Access the logger instance
     def logger
-      @@logger ||= defined?(Rails) && Rails.logger || Adcloud.config.logger || Logger.new(STDOUT)
+      @@logger ||= (defined?(Rails) && Rails.logger) || Adcloud.config.logger || Logger.new(STDOUT)
     end
 
     # Allow to override the logger

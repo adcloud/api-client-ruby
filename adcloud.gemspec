@@ -13,10 +13,12 @@ Gem::Specification.new do |gem|
   gem.name          = "adcloud"
   gem.require_paths = ["lib"]
   gem.version       = Adcloud::VERSION
+
+  gem.add_development_dependency 'minitest', '~> 3.4.0'
+  gem.add_development_dependency 'mocha', '~> 0.12.4'
   gem.add_development_dependency 'rake'
-  gem.add_development_dependency 'webmock'
-  gem.add_development_dependency 'mocha'
   gem.add_development_dependency 'simplecov'
+  gem.add_development_dependency 'webmock'
   # gem.add_development_dependency 'debugger'
 
   gem.add_dependency 'virtus'

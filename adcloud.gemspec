@@ -8,7 +8,7 @@ Gem::Specification.new do |gem|
   gem.description   = %Q{This is the official adcloud API gem. If you have any problems or requests please contact api@adcloud.com.}
   gem.homepage      = 'http://adcloud.com/'
   gem.executables   = `git ls-files -- bin/*`.split("\n").map{ |f| File.basename(f) }
-  gem.files         = `git ls-files`.split("\n")
+  gem.files         = `git ls-files`.split("\n") - ['Gemfile.lock']
   gem.test_files    = `git ls-files -- {test,spec,features}/*`.split("\n")
   gem.name          = 'adcloud'
   gem.require_paths = ['lib']

@@ -2,6 +2,7 @@ module Adcloud
   class Advertisement < Adcloud::Entity
     attribute :id, Integer
     attribute :product_id, Integer
+    attribute :campaign_id, Integer
     attribute :type, String
     attribute :advertisement_design_id, Integer
     attribute :target_url, String

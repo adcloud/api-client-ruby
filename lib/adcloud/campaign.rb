@@ -37,18 +37,21 @@ module Adcloud
     attribute :keyword_lifetime, Integer
     attribute :comment, String
     attribute :budget_limit, Float
+    attribute :budget_limit_today, Float
     attribute :budget_limit_allowed, Boolean
     attribute :unit_price_maximum, Float
     attribute :locations, Array
     attribute :type, Integer
+    attribute :topic_ids, Array
     attribute :delivery_external, Boolean
     attribute :delivery_internal, Boolean
     attribute :delivery_type, Integer
     attribute :deactivated_on, DateTime
+    attribute :options, Hash
+    attribute :has_end_date, Boolean
     attribute :modified, DateTime
     attribute :created, DateTime
     # attribute :fixed_price, # missing
-    # attribute :mobile_targeting, # missing
 
     # @return [void] Validate the campaign against the api
     def validate

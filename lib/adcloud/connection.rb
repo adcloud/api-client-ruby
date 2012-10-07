@@ -42,5 +42,10 @@ module Adcloud
       response.body
     end
 
+    def put(path, params = {})
+      response = connection.put path, params
+      response.body
+    end
+
   end
 end

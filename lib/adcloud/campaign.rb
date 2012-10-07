@@ -63,6 +63,16 @@ module Adcloud
       end
     end
 
+    def request_approval!
+      result = connection.put("campaigns/#{self.id}/request_approval")
+      result && result["_meta"] && result["_meta"]["status"] == 200 || false
+    end
+
+    def end!
+      result = connection.put("campaigns/#{self.id}/end")
+      result && result["_meta"] && result["_meta"]["status"] == 200 || false
+    end
+
     # @return [Boolean] True when campaign is valid - otherwise false
     def valid?
       self.validate

@@ -73,6 +73,20 @@ describe Adcloud::Entity do
     end
   end
 
+  describe '.all!' do
+    let(:items) { (1..200).to_a.map{ |i| { "id" => i, "name" => "Test Car #{i}", "_meta" => { "type" => "Car" } } } }
+    let(:first_page) { { "_meta" => { "type" => "Array<Car>", "page" => 1, "size" => 200, "per_page" => 200, "total_count" => 201, "total_pages" => 2, "sort" => {}, "uuid" => "aabe4f5f31691f049ea1942e6a6d1793" }, "items" => items} }
+    let(:second_page) { { "_meta" => { "type" => "Array<Car>", "page" => 2, "size" => 1, "per_page" => 200, "total_count" => 201, "total_pages" => 2, "sort" => {}, "uuid" => "aabe4f5f31691f049ea1942e6a6d1794" }, "items" => [{ "id" => 201, "name" => "Test Car 201", "_meta" => { "type" => "Car" } }]} }
+
+    before { subject.stubs(:connection => connection) }
+
+    it 'fetches all entity objects' do
+      connection.expects(:get).with('cars', :filter => {}, :page => 1, :per_page => 200).returns(first_page)
+      connection.expects(:get).with('cars', :filter => {}, :page => 2, :per_page => 200).returns(second_page)
+      subject.all!.size.must_equal 201
+    end
+  end
+
   describe '#create' do
     before { subject.stubs(:connection => connection) }
 

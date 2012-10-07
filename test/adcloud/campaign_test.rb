@@ -51,4 +51,36 @@ describe Adcloud::Campaign do
     end
   end
 
+  describe '#request_approval!' do
+    before { campaign.id = 123 }
+
+    it 'is true when the state has changed' do
+      response_data = {'_meta' => { 'status' => 200, 'message' => 'status changed' } }
+      connection.expects(:put).with('campaigns/123/request_approval').returns(response_data)
+      campaign.request_approval!.must_equal true
+    end
+
+    it 'is false when the state could not be changed' do
+      response_data = {'_meta' => { 'status' => 400, 'message' => 'bad request' } }
+      connection.expects(:put).with('campaigns/123/request_approval').returns(response_data)
+      campaign.request_approval!.must_equal false
+    end
+  end
+
+  describe '#end!' do
+    before { campaign.id = 123 }
+
+    it 'is true when the state has changed' do
+      response_data = {'_meta' => { 'status' => 200, 'message' => 'status changed' } }
+      connection.expects(:put).with('campaigns/123/end').returns(response_data)
+      campaign.end!.must_equal true
+    end
+
+    it 'is false when the state could not be changed' do
+      response_data = {'_meta' => { 'status' => 400, 'message' => 'bad request' } }
+      connection.expects(:put).with('campaigns/123/end').returns(response_data)
+      campaign.end!.must_equal false
+    end
+  end
+
 end

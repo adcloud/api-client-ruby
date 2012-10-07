@@ -3,6 +3,8 @@ module Adcloud
   class Entity
     include Virtus
 
+    MAX_PER_PAGE = 200
+
     attr_accessor :errors
 
     attribute :_meta, Hash
@@ -45,7 +47,20 @@ module Adcloud
       # @return [Array] Entities matching the criteria or all
       def all(filter = {}, page = 1, per_page = 50)
         result = connection.get(self.api_endpoint, :filter => filter, :page => page, :per_page => per_page)
+        yield result['_meta'] if block_given?
         result["items"].map { |raw_campaign| self.new(raw_campaign) }
+      end
+
+      # fetches all objects via pagination. Be careful, this could be a lot!
+      def all!(filter = {})
+        result = []
+        page = 0
+        total_pages = 1
+        begin
+          page += 1
+          result += self.all(filter, page, MAX_PER_PAGE) { |meta_data| total_pages = meta_data['total_pages'] }
+        end while page < total_pages
+        result
       end
 
       # @return [Object] The entity with the unique identifier

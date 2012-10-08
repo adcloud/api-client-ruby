@@ -47,6 +47,13 @@ describe Adcloud::Connection do
       end
     end
 
+    describe "delete" do
+      it "should fire a delete request" do
+        stub_request(:delete, url).to_return(:status => 200, :body => { "_meta" => {}, "hello" => "world" }, :headers => {})
+        subject.delete('whatever').must_equal({ "_meta" => {}, "hello" => "world" })
+      end
+    end
+
     describe "get" do
       it "should fire a get request" do
         stub_request(:get, url).to_return(:status => 200, :body => {"_meta" => {}, "hello" => "world"}, :headers => {})

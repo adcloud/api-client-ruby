@@ -143,6 +143,14 @@ describe Adcloud::Entity do
     end
   end
 
+  describe '.delete' do
+    it 'deletes an existing car' do
+      car = subject.new(:id => 42)
+      car.connection.expects(:delete).returns('response')
+      car.destroy.must_equal car
+    end
+  end
+
   describe "errors" do
     it "should be empty" do
       subject.new.errors.must_be_empty

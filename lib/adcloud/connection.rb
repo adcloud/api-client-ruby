@@ -47,5 +47,10 @@ module Adcloud
       response.body
     end
 
+    def delete(path, params = {})
+      response = connection.delete path, params
+      response.body
+    end
+
   end
 end

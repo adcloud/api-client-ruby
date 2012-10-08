@@ -29,6 +29,11 @@ module Adcloud
       false
     end
 
+    def destroy
+      result = connection.delete("#{self.class.api_endpoint}/#{id}")
+      self
+    end
+
     class << self
       attr_accessor :api_endpoint, :connection
 

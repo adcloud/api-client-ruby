@@ -1,6 +1,12 @@
 Release Notes
 =============
 
+### 0.7.2
+
+* Add campaign and advertisement attributes
+* Allow campaign state changes
+* Allow advertisement deletion (including media files)
+
 ### 0.7.1
 
 * Remove Gemfile.lock from gem

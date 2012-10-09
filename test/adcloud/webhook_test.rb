@@ -1,7 +1,7 @@
 require 'test_helper'
 
 describe Adcloud::Webhook do
-  let(:event_payload) { '{"id":"2","country_id":"1","guidance_price_cpc":"1.49","guidance_price_cpm":"0.6","variance":"20.00","modified":"2012-09-04 14:21:20","created":"2012-04-10 20:40:24","_meta":{"is_test_data":true,"model":"TopicPrice","event":"TopicPrice.update","updated_fields":["guidance_price_cpc","guidance_price_cpm"],"id":"2"}}' }
+  let(:event_payload) { '{"id":"2","country_id":"1","guidance_price_cpc":"1.49","guidance_price_cpm":"0.6","variance":"20.00","modified":"2012-09-04 14:21:20","created":"2012-04-10 20:40:24","_meta":{"is_test_data":true,"model":"TopicPrice","event":"TopicDiscount.update","updated_fields":["guidance_price_cpc","guidance_price_cpm"],"id":"2"}}' }
   let(:payload) { "[#{event_payload}]" }
 
   subject { Adcloud::Webhook.new(payload) }

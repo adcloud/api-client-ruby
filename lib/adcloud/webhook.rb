@@ -21,7 +21,7 @@ module Adcloud
     def process!
       self.events.each do |event|
         proc = case event.type
-        when 'TopicPrice.update'
+        when 'TopicDiscount.update'
           :on_topic_price_update
         when 'Booking.update'
           :on_campaign_update

@@ -15,6 +15,8 @@ module Adcloud
   autoload :ApiError, "adcloud/api_error"
   autoload :Authentication, "adcloud/authentication"
   autoload :Campaign, "adcloud/campaign"
+  autoload :CampaignPerformanceData, "adcloud/campaign_performance_data"
+  autoload :CampaignPerformanceDataEntry, "adcloud/campaign_performance_data_entry"
   autoload :Connection, "adcloud/connection"
   autoload :Customer, "adcloud/customer"
   autoload :Entity, "adcloud/entity"

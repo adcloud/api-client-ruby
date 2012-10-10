@@ -29,6 +29,14 @@ module Adcloud
       false
     end
 
+    def update
+      result = connection.put("#{self.class.api_endpoint}/#{id}", { self.class.api_name => attributes_for_update })
+      true
+    rescue Adcloud::BadRequestError => ex
+      derive_errors_from_error(ex)
+      false
+    end
+
     def destroy
       result = connection.delete("#{self.class.api_endpoint}/#{id}")
       self
@@ -97,6 +105,10 @@ module Adcloud
     # @return [Hash] Attributes without those required for campaign creation
     def attributes_for_create
       self.attributes.reject { |i| [:id, :_meta].include?(i) }
+    end
+
+    def attributes_for_update
+      self.attributes.reject { |i| [:_meta].include?(i) }
     end
 
   end

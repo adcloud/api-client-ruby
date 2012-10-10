@@ -134,6 +134,27 @@ describe Adcloud::Entity do
     end
   end
 
+  describe '#update' do
+    before { subject.stubs(:connection => connection) }
+
+    describe 'when submitting a valid object' do
+      let(:response) { { '_meta' => { 'status' => 200 }, 'id' => 1 } }
+
+      it 'sends a request to the api' do
+        car = subject.new(:id => 1, :name => 'Audi')
+        attributes = car.attributes
+        attributes.delete(:_meta)
+        connection.expects(:put).with('cars/1', { 'car' => attributes }).returns(response)
+        car.update
+      end
+
+      it 'returns true' do
+        connection.stubs(:put).returns(response)
+        subject.new.update.must_equal true
+      end
+    end
+  end
+
   describe '.create' do
     it 'creates a new car' do
       car = subject.new

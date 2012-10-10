@@ -1,6 +1,12 @@
 Release Notes
 =============
 
+### 0.7.3
+
+* Allow campaig and advertisement updates
+* Make performance data available
+* Incorporate webhooks api changes
+
 ### 0.7.2
 
 * Add campaign and advertisement attributes

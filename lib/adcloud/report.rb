@@ -13,6 +13,27 @@ module Adcloud
         return self.new(result)
       end
 
+      def find_all_by_date(date)
+        paged_items = []
+        page = 0
+        total_pages = 1
+        retry_count = 0
+        page_result = nil
+        begin
+          begin
+            page += 1
+            raw_result = connection.get(self.api_endpoint, { filter: { date: date.to_s }, :page => page, :per_page => Entity::MAX_PER_PAGE })
+            total_pages = raw_result['_meta']['total_pages']
+            page_result = self.new(raw_result)
+            paged_items += page_result.items
+          rescue => ex
+            retry if retry_count < 5
+          end
+        end while page < total_pages
+        page_result.items = paged_items
+        page_result
+      end
+
       def api_endpoint
         @api_endpoint ||= self.name.demodulize.tableize
       end

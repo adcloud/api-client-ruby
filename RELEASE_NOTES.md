@@ -1,6 +1,10 @@
 Release Notes
 =============
 
+### 0.7.4
+
+* Allow fetching all reports for a date ```find_all_by_date```
+
 ### 0.7.3
 
 * Allow campaig and advertisement updates

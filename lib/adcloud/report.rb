@@ -9,7 +9,7 @@ module Adcloud
       attr_accessor :api_endpoint, :connection
 
       def find_by_date(date)
-        result = connection.get(self.api_endpoint, { filter: { date: date.to_s } })
+        result = connection.get(self.api_endpoint, { filter: { date: date.to_s }, new_backend: true })
         return self.new(result)
       end
 
@@ -22,7 +22,7 @@ module Adcloud
         begin
           begin
             page += 1
-            raw_result = connection.get(self.api_endpoint, { filter: { date: date.to_s }, :page => page, :per_page => Entity::MAX_PER_PAGE })
+            raw_result = connection.get(self.api_endpoint, { filter: { date: date.to_s }, :page => page, :per_page => Entity::MAX_PER_PAGE, new_backend: true })
             total_pages = raw_result['_meta']['total_pages']
             page_result = self.new(raw_result)
             paged_items += page_result.items

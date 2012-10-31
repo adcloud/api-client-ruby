@@ -15,7 +15,7 @@ describe Adcloud::Report do
     end
 
     it 'access the api at the correct path' do
-      subject.connection.expects(:get).with('reports/advertiser', { filter: { date: '1981-06-21' } })
+      subject.connection.expects(:get).with('reports/advertiser', { filter: { date: '1981-06-21' }, new_backend: true })
       subject.find_by_date(Date.new(1981, 06, 21))
     end
 

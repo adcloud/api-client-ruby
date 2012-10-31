@@ -51,7 +51,6 @@ module Adcloud
     attribute :has_end_date, Boolean
     attribute :modified, DateTime
     attribute :created, DateTime
-    # attribute :fixed_price, # missing
 
     # @return [void] Validate the campaign against the api
     def validate

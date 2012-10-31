@@ -1,6 +1,11 @@
 Release Notes
 =============
 
+### 0.7.5
+
+* Reports booking has been renamed to campaign
+* Allow to change campaigns to offer state with ```campaign.offer!```
+
 ### 0.7.4
 
 * Allow fetching all reports for a date ```find_all_by_date```

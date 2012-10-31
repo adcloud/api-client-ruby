@@ -8,7 +8,7 @@ module Adcloud
     attribute :ad_placement_id, Integer
     attribute :product_id, Integer
     attribute :ad_id, Integer
-    attribute :booking_id, Integer
+    attribute :campaign_id, Integer
     attribute :page_type, Integer
     attribute :ad_position, Integer
     attribute :ad_count, Integer
@@ -31,7 +31,7 @@ module Adcloud
     attribute :design, String
     attribute :topic, String
     attribute :ad, String
-    attribute :booking, String
+    attribute :campaign, String
     attribute :product, String
     attribute :ad_impressions_costs, Float
     attribute :clicks_costs, Float

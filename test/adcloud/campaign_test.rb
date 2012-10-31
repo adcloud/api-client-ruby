@@ -83,4 +83,20 @@ describe Adcloud::Campaign do
     end
   end
 
+  describe '#end!' do
+    before { campaign.id = 123 }
+
+    it 'is true when the state has changed' do
+      response_data = {'_meta' => { 'status' => 200, 'message' => 'status changed' } }
+      connection.expects(:put).with('campaigns/123/offer').returns(response_data)
+      campaign.offer!.must_equal true
+    end
+
+    it 'is false when the state could not be changed' do
+      response_data = {'_meta' => { 'status' => 400, 'message' => 'bad request' } }
+      connection.expects(:put).with('campaigns/123/offer').returns(response_data)
+      campaign.offer!.must_equal false
+    end
+  end
+
 end

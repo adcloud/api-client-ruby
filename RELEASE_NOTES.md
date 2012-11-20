@@ -1,6 +1,10 @@
 Release Notes
 =============
 
+### 0.7.5.1
+
+* Log failed api responses
+
 ### 0.7.5
 
 * Reports booking has been renamed to campaign

@@ -6,7 +6,7 @@ Gem::Specification.new do |gem|
   gem.email         = ['jan@railslove.com', 'm.schulz@kulturfluss.de']
   gem.summary       = %Q{Wrapper for adcloud API}
   gem.description   = %Q{This is the official adcloud API gem. If you have any problems or requests please contact api@adcloud.com.}
-  gem.homepage      = 'http://adcloud.com/'
+  gem.homepage      = 'https://github.com/adcloud/api-client-ruby'
   gem.executables   = `git ls-files -- bin/*`.split("\n").map{ |f| File.basename(f) }
   gem.files         = `git ls-files`.split("\n") - ['Gemfile.lock']
   gem.test_files    = `git ls-files -- {test,spec,features}/*`.split("\n")

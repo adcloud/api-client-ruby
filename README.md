@@ -19,11 +19,11 @@ Installation
 
 In order to install the gem, run
 
-    gem install adcloud-api
+    gem install adcloud
 
 or if you are using bundler, add the following to your Gemfile
 
-    gem 'adcloud-api'
+    gem 'adcloud'
 
 
 Configuration

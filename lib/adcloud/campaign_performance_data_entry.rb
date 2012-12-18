@@ -10,8 +10,8 @@ module Adcloud
     attribute :clicks_delivered_today, Integer
     attribute :impressions_delivered, Integer
     attribute :impressions_delivered_today, Integer
-    attribute :leads_delivered, Integer
-    attribute :leads_delivered_today, Integer
+    attribute :conversions_delivered, Integer
+    attribute :conversions_delivered_today, Integer
     attribute :performance, Float
 
   end

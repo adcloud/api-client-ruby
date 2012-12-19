@@ -1,6 +1,10 @@
 Release Notes
 =============
 
+### 0.7.5.2
+
+* renamed leads_* to conversions_* for `CampaignPerformanceEntry`
+
 ### 0.7.5.1
 
 * Log failed api responses

@@ -82,6 +82,12 @@ module Adcloud
         self.new(result)
       end
 
+      # @return [Object] The entity with the unique identifier
+      def find_by_name(name)
+        result = connection.get("campaigns/find_by_name", name: name)
+        result["items"].map { |raw_campaign| self.new(raw_campaign) }
+      end
+
       # @return [Enitity] Object has errors when creation failed
       def create(params = {})
         entity = self.new(params)

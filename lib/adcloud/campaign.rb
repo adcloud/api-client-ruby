@@ -90,7 +90,7 @@ module Adcloud
       if result && result["_meta"] && result["_meta"]["status"] == 226
         @errors = self.errors.merge(result["_meta"]["details"])
       else
-        raise AdcloudUnknownAPIError::InvalidApiResponse.new('Empty repsonse for campaign validation')
+        raise AdcloudUnknownAPIError::InvalidApiResponse.new('Empty response for campaign validation')
       end
     end
 

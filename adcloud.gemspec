@@ -20,7 +20,7 @@ Gem::Specification.new do |gem|
   gem.add_development_dependency 'simplecov'
   gem.add_development_dependency 'webmock'
 
-  gem.add_dependency 'virtus'    
+  gem.add_dependency 'virtus'
   gem.add_dependency 'activesupport', "~>3.2.6"
   gem.add_dependency 'faraday'
   gem.add_dependency 'faraday_middleware'

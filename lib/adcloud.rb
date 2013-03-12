@@ -24,7 +24,7 @@ module Adcloud
   autoload :MediaFile, "adcloud/media_file"
   autoload :Product, "adcloud/product"
   autoload :Report, "adcloud/report"
-  autoload :ReportEntry, "adcloud/report_entry"  
+  autoload :ReportEntry, "adcloud/report_entry"
   autoload :Topic, "adcloud/topic"
   autoload :TopicDiscount, "adcloud/topic_discount"
   autoload :Webhook, "adcloud/webhook"

@@ -61,7 +61,7 @@ module Adcloud
       @errors || {}
     end
 
-    private
+    protected
 
     # Set the campaign errors from the api response
     def derive_errors_from_error(error)

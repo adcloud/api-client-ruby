@@ -56,8 +56,8 @@ Adcloud.configure do |c|
   c.protocol = 'https'
   c.host = 'api.adcloud.com'
   c.api_version = "v2"
-  c.http_open_timeout = 5
-  c.http_read_timeout = 10
+  c.http_open_timeout = 120
+  c.http_read_timeout = 1800
   c.debug = false
   c.webhooks = Adcloud::WebhookConfig.new
   c.webhooks.filter_tests = true

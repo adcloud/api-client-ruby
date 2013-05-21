@@ -82,5 +82,11 @@ module Adcloud
       self.validate
       self.errors.empty?
     end
+
+    # @return [Object] The entity with the unique identifier
+    def find_by_name(name)
+      result = connection.get("campaigns/find_by_name", name: name)
+      result["items"].map { |raw_campaign| self.new(raw_campaign) }
+    end
   end
 end

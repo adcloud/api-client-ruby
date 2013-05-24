@@ -15,18 +15,19 @@ module Adcloud
 
       def find_all_by_date(date, booking_ids=[])
         paged_items = []
-        page = 0
         total_pages = 1
         retry_count = 0
         page_result = nil
-        begin
+        (1..total_pages).each do |page|
           begin
-            page += 1
+            search_params = { filter: { date: date.to_s }, page: page, per_page: Entity::MAX_PER_PAGE, new_backend: true }
             if booking_ids
-              raw_result = connection.get(self.api_endpoint, { filter: { date: date.to_s, booking_id: booking_ids }, :page => page, :per_page => Entity::MAX_PER_PAGE, new_backend: false})
-            else
-              raw_result = connection.get(self.api_endpoint, { filter: { date: date.to_s }, :page => page, :per_page => Entity::MAX_PER_PAGE, new_backend: true })
+              search_params[:filter][:booking_id] = booking_ids
+              search_params[:new_backend] = false
             end
+
+            raw_result = connection.get(self.api_endpoint, search_params)
+
             total_pages = raw_result['_meta']['total_pages']
             page_result = self.new(raw_result)
             paged_items += page_result.items
@@ -34,7 +35,7 @@ module Adcloud
             retry if retry_count < 5
             retry_count += 1
           end
-        end while page < total_pages
+        end
         page_result.items = paged_items
         page_result
       end

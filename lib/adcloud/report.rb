@@ -13,7 +13,7 @@ module Adcloud
         return self.new(result)
       end
 
-      def find_all_by_date(date)
+      def find_all_by_date(date, booking_ids=[])
         paged_items = []
         page = 0
         total_pages = 1
@@ -22,12 +22,17 @@ module Adcloud
         begin
           begin
             page += 1
-            raw_result = connection.get(self.api_endpoint, { filter: { date: date.to_s }, :page => page, :per_page => Entity::MAX_PER_PAGE, new_backend: true })
+            if booking_ids
+              raw_result = connection.get(self.api_endpoint, { filter: { date: date.to_s, booking_id: booking_ids }, :page => page, :per_page => Entity::MAX_PER_PAGE, new_backend: false})
+            else
+              raw_result = connection.get(self.api_endpoint, { filter: { date: date.to_s }, :page => page, :per_page => Entity::MAX_PER_PAGE, new_backend: true })
+            end
             total_pages = raw_result['_meta']['total_pages']
             page_result = self.new(raw_result)
             paged_items += page_result.items
           rescue => ex
             retry if retry_count < 5
+            retry_count += 1
           end
         end while page < total_pages
         page_result.items = paged_items

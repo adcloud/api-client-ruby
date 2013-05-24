@@ -18,24 +18,34 @@ module Adcloud
         total_pages = 1
         retry_count = 0
         page_result = nil
-        (1..total_pages).each do |page|
-          begin
-            search_params = { filter: { date: date.to_s }, page: page, per_page: Entity::MAX_PER_PAGE, new_backend: true }
-            if booking_ids
-              search_params[:filter][:booking_id] = booking_ids
-              search_params[:new_backend] = false
-            end
+        status = 200
 
-            raw_result = connection.get(self.api_endpoint, search_params)
-
-            total_pages = raw_result['_meta']['total_pages']
-            page_result = self.new(raw_result)
-            paged_items += page_result.items
-          rescue => ex
-            retry if retry_count < 5
-            retry_count += 1
+        page = 0
+        begin
+          page += 1
+          search_params = { filter: { date: date.to_s }, page: page, per_page: Entity::MAX_PER_PAGE, new_backend: true }
+          if booking_ids
+            search_params[:filter][:booking_id] = booking_ids
+            search_params[:new_backend] = false
           end
-        end
+
+          raw_result = connection.get(self.api_endpoint, search_params)
+
+          total_pages = raw_result['_meta']['total_pages']
+          page_result = self.new(raw_result)
+          paged_items += page_result.items
+        rescue => ex
+          if retry_count < 5
+            retry
+          else
+            status = 501
+            paged_items = []
+          end
+          retry_count += 1
+        end while page < total_pages
+
+        page_result = self.new({_meta: {}, items: []}) if page_result.nil?
+        page_result._meta[:status] = status
         page_result.items = paged_items
         page_result
       end

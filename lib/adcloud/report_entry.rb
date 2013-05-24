@@ -9,6 +9,7 @@ module Adcloud
     attribute :product_id, Integer
     attribute :ad_id, Integer
     attribute :campaign_id, Integer
+    attribute :booking_id, Integer
     attribute :page_type, Integer
     attribute :ad_position, Integer
     attribute :ad_count, Integer

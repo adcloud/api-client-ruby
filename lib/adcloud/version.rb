@@ -1,3 +1,3 @@
 module Adcloud
-  VERSION = '0.7.5.3'
+  VERSION = '0.7.6.1'
 end

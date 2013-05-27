@@ -27,11 +27,11 @@ describe "Adcloud" do
     end
 
     it "should return the default open timout" do
-      subject.http_open_timeout.must_equal 5
+      subject.http_open_timeout.must_equal 120
     end
 
     it "should return the default read timeout" do
-      subject.http_read_timeout.must_equal 10
+      subject.http_read_timeout.must_equal 1800
     end
 
   end

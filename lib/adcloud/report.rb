@@ -18,7 +18,6 @@ module Adcloud
         total_pages = 1
         retry_count = 0
         page_result = nil
-        status = 200
 
         page = 0
         begin
@@ -38,14 +37,11 @@ module Adcloud
           if retry_count < 5
             retry
           else
-            status = 501
-            paged_items = []
+            raise ex
           end
           retry_count += 1
         end while page < total_pages
 
-        page_result = self.new({_meta: {}, items: []}) if page_result.nil?
-        page_result._meta[:status] = status
         page_result.items = paged_items
         page_result
       end

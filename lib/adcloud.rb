@@ -22,6 +22,7 @@ module Adcloud
   autoload :Entity, "adcloud/entity"
   autoload :ExceptionRaiser, "adcloud/exception_raiser"
   autoload :MediaFile, "adcloud/media_file"
+  autoload :Paginator, "adcloud/paginator"
   autoload :Product, "adcloud/product"
   autoload :Report, "adcloud/report"
   autoload :ReportEntry, "adcloud/report_entry"

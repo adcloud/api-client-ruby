@@ -37,7 +37,8 @@ module Adcloud
           if retry_count < 5
             retry
           else
-            raise ex
+            Adcloud.logger.error { "API Exception #{ex}" }
+            raise ApiError, "Connection failed"
           end
           retry_count += 1
         end while page < total_pages

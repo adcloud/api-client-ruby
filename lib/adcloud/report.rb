@@ -1,6 +1,7 @@
 module Adcloud
   class Report
     include Virtus
+    include EndlessPages
 
     attribute :_meta, Hash
     attribute :items, Array[Adcloud::ReportEntry]
@@ -20,17 +21,13 @@ module Adcloud
           params[:new_backend] = false
         end
 
-        paginator = Adcloud::Paginator.new(self.api_endpoint, params: params )
-        paginator.perform
+        endless_pages(endpoint_url: self.api_endpoint, params: params)
       end
 
       def api_endpoint
         @api_endpoint ||= self.name.demodulize.tableize
       end
 
-      def connection
-        @connection ||= Connection.new
-      end
     end
 
     # Define this after class methods are added

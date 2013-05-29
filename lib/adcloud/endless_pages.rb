@@ -4,27 +4,37 @@ module EndlessPages
   module ClassMethods
 
     def endless_pages(opts = {}, &block)
-      @endpoint_url = opts[:endpoint_url] ||= self.endpoint_url
-      if not @endpoint_url
-        raise "You must define an endpoint_url attr or pass endpoint_url into .pages(endpoint_url: 'http://www.example.com')"
-      end
-      @params = opts[:params] ||= {}
-      @connection = opts[:connection] ||= Adcloud::Connection.new
+      @opts = opts
       perform(&block)
+    end
+
+    def conn
+      @opts[:connection] ||= Adcloud::Connection.new
+    end
+
+    def endpoint
+      @opts[:endpoint_url] ||= self.endpoint_url
+      raise "You must either pass endpoint_url into endless_pages OR define a class method .endpoint_url" unless @opts[:endpoint_url]
+      @opts[:endpoint_url]
+    end
+
+    def params
+        @opts[:params] ||= {}
     end
 
     def perform(&block)
       paged_items = []
 
-      page = @params[:page] ||= 0
-      total_pages = @params[:total_pages] ||= 1
-      retry_count = @params[:retry_count] ||= 0
-      page_result = @params[:page_result] ||= nil
+      page = params[:page] ||= 1
+      page = 1 if page == 0
+
+      total_pages = 1
+      retry_count = 0
+      page_result = params[:page_result] ||= nil
 
       begin
         begin
-          page += 1
-          raw_result = @connection.get(@api_endpoint, @params)
+          raw_result = conn.get(endpoint, params)
           total_pages = raw_result['_meta']['total_pages']
 
           page_result = self.new(raw_result) # your service class needs to include Virtus
@@ -32,12 +42,20 @@ module EndlessPages
           page_result.items.each do |item|
             block.call(item)
           end if block
+
           paged_items += page_result.items
+          page += 1
 
         rescue => ex
-          retry if retry_count < 5
+          # Catch exceptions
+          if retry_count <= 5
+            retry
+          else
+            raise ex
+          end
         end
       end while page < total_pages
+
       page_result.items = paged_items
       page_result
     end

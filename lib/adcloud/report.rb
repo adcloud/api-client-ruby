@@ -13,23 +13,36 @@ module Adcloud
         return self.new(result)
       end
 
-      def find_all_by_date(date)
+      def find_all_by_date(date, booking_ids=[])
         paged_items = []
-        page = 0
         total_pages = 1
         retry_count = 0
         page_result = nil
+
+        page = 0
         begin
-          begin
-            page += 1
-            raw_result = connection.get(self.api_endpoint, { filter: { date: date.to_s }, :page => page, :per_page => Entity::MAX_PER_PAGE, new_backend: true })
-            total_pages = raw_result['_meta']['total_pages']
-            page_result = self.new(raw_result)
-            paged_items += page_result.items
-          rescue => ex
-            retry if retry_count < 5
+          page += 1
+          search_params = { filter: { date: date.to_s }, page: page, per_page: Entity::MAX_PER_PAGE, new_backend: true }
+          if booking_ids
+            search_params[:filter][:booking_id] = booking_ids
+            search_params[:new_backend] = false
           end
+
+          raw_result = connection.get(self.api_endpoint, search_params)
+
+          total_pages = raw_result['_meta']['total_pages']
+          page_result = self.new(raw_result)
+          paged_items += page_result.items
+        rescue => ex
+          if retry_count < 5
+            retry
+          else
+            Adcloud.logger.error { "API Exception #{ex}" }
+            raise ApiError, "Connection failed"
+          end
+          retry_count += 1
         end while page < total_pages
+
         page_result.items = paged_items
         page_result
       end

@@ -84,7 +84,7 @@ module Adcloud
     end
 
     # @return [Object] The entity with the unique identifier
-    def find_by_name(name)
+    def self.find_by_name(name)
       result = connection.get("campaigns/find_by_name", name: name)
       result["items"].map { |raw_campaign| self.new(raw_campaign) }
     end

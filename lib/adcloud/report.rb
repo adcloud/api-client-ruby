@@ -1,6 +1,7 @@
 module Adcloud
   class Report
     include Virtus
+    include EndlessPages
 
     attribute :_meta, Hash
     attribute :items, Array[Adcloud::ReportEntry]
@@ -13,34 +14,21 @@ module Adcloud
         return self.new(result)
       end
 
-      def find_all_by_date(date)
-        paged_items = []
-        page = 0
-        total_pages = 1
-        retry_count = 0
-        page_result = nil
-        begin
-          begin
-            page += 1
-            raw_result = connection.get(self.api_endpoint, { filter: { date: date.to_s }, :page => page, :per_page => Entity::MAX_PER_PAGE, new_backend: true })
-            total_pages = raw_result['_meta']['total_pages']
-            page_result = self.new(raw_result)
-            paged_items += page_result.items
-          rescue => ex
-            retry if retry_count < 5
-          end
-        end while page < total_pages
-        page_result.items = paged_items
-        page_result
+      def find_all_by_date(date, booking_ids=[])
+        params = { filter: { date: date.to_s }, :per_page => Entity::MAX_PER_PAGE, new_backend: true }
+
+        if booking_ids
+          params[:filter][:booking_id] = booking_ids
+          params[:new_backend] = false
+        end
+
+        endless_pages(endpoint_url: self.api_endpoint, params: params)
       end
 
       def api_endpoint
         @api_endpoint ||= self.name.demodulize.tableize
       end
 
-      def connection
-        @connection ||= Connection.new
-      end
     end
 
     # Define this after class methods are added

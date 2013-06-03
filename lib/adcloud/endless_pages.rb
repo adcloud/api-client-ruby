@@ -30,34 +30,32 @@ module EndlessPages
 
       total_pages = 1
       retry_count = 0
-      page_result = params[:page_result] ||= nil
+      page_result = params[:page_result] ||= []
 
       begin
-        begin
-          raw_result = conn.get(endpoint, params)
-          total_pages = raw_result['_meta']['total_pages']
+        raw_result = conn.get(endpoint, params)
+        total_pages = raw_result['_meta']['total_pages']
 
-          page_result = self.new(raw_result) # your service class needs to include Virtus
-          # if a block is provided then start returning results right away
-          page_result.items.each do |item|
-            block.call(item)
-          end if block
+        page_result = self.new(raw_result) # your service class needs to include Virtus
+        # if a block is provided then start returning results right away
+        page_result.items.each do |item|
+          block.call(item)
+        end if block
 
-          paged_items += page_result.items
-          page += 1
+        paged_items += page_result.items
+        page += 1
 
-        rescue => ex
-          # Catch exceptions
-          if retry_count <= 5
-            retry
-          else
-            raise ex
-          end
+      rescue => ex
+        if retry_count <= 5
+          retry
+        else
+          Adcloud.logger.error { "API Exception #{ex}" }
+          raise ApiError, "Connection failed"
         end
+        retry_count += 1
       end while page < total_pages
 
-      page_result.items = paged_items
-      page_result
+      paged_items
     end
 
   end

@@ -18,6 +18,7 @@ module Adcloud
         params = { filter: { date: date.to_s }, :per_page => Entity::MAX_PER_PAGE, new_backend: true }
 
         if booking_ids
+          params[:filter][:booking_id] = booking_ids
           params[:new_backend] = false
         end
 

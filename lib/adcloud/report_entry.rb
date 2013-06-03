@@ -9,6 +9,7 @@ module Adcloud
     attribute :product_id, Integer
     attribute :ad_id, Integer
     attribute :campaign_id, Integer
+    attribute :booking_id, Integer
     attribute :page_type, Integer
     attribute :ad_position, Integer
     attribute :ad_count, Integer
@@ -44,5 +45,16 @@ module Adcloud
     attribute :language, String
     attribute :country, String
     attribute :currency, String
+
+      def campaign_id
+        """ 
+        in the case of using v2 reporting system which is being depreciated
+        it is necessary to convert booking_id to the new campaign_id value
+        this method is here to ensure all services get the correct value
+        """
+        @campaign_id || @booking_id
+      end
   end
+
+
 end

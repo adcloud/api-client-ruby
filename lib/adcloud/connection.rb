@@ -21,7 +21,7 @@ module Adcloud
     end
 
     def connection(auth = true)
-      Adcloud::logger.info "Connection Url: #{url}"
+      Adcloud::logger.debug "Connection Url: #{url}"
 
       auth_header = auth && { :Authorization =>  "Bearer #{authentication_token}" } || {}
       connection ||= Faraday.new(:url => url, :headers => {}.merge(auth_header)) do |faraday|
@@ -35,26 +35,26 @@ module Adcloud
     end
 
     def post(path, params = {})
-      Adcloud::logger.info "POST Url: #{url} #{path}"
-      Adcloud::logger.info "POST params: #{params}"
+      Adcloud::logger.debug "POST Url: #{url} #{path}"
+      Adcloud::logger.debug "POST params: #{params}"
       response = connection.post path, params
       response.body
     end
 
     def get(path, params = {})
-      Adcloud::logger.info "GET Url: #{url} #{path}"
+      Adcloud::logger.debug "GET Url: #{url} #{path}"
       response = connection.get path, params
       response.body
     end
 
     def put(path, params = {})
-      Adcloud::logger.info "PUT Url: #{url} #{path}"
+      Adcloud::logger.debug "PUT Url: #{url} #{path}"
       response = connection.put path, params
       response.body
     end
 
     def delete(path, params = {})
-      Adcloud::logger.info "DELETE Url: #{url} #{path}"
+      Adcloud::logger.debug "DELETE Url: #{url} #{path}"
       response = connection.delete path, params
       response.body
     end

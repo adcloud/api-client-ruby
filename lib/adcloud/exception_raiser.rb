@@ -15,7 +15,7 @@ module Adcloud
       when 500
         raise Adcloud::ServerError.new(response)
       else
-        raise StandardError.new("Could not handle status #{response.status}")
+        raise Adcloud::UnknownError.new(response)
       end
     end
 

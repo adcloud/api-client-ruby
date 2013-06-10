@@ -28,6 +28,10 @@ module Adcloud
       self.meta["status"]
     end
 
+    def to_s
+      self.response.message
+    end
+
   end
 
 end

@@ -33,6 +33,7 @@ module Adcloud
   autoload :WebhookEvent, "adcloud/webhook_event"
 
   module AdcloudUnknownAPIError; class InvalidApiResponse < StandardError; end; end
+  class UnknownError < ApiError; end
   class BadRequestError < ApiError; end
   class NotFoundError < ApiError; end
   class ServerError < ApiError; end

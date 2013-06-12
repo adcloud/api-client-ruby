@@ -35,6 +35,8 @@ module EndlessPages
       begin
         Adcloud::logger.debug "Page: #{page}"
 
+        params[:page] = page
+
         raw_result = conn.get(endpoint, params)
         total_pages = raw_result['_meta']['total_pages']
         Adcloud::logger.debug "total_pages: #{total_pages}"
